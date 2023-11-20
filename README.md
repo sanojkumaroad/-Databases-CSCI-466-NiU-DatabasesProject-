@@ -43,17 +43,17 @@ You can use CSS and JQuery all you want to change the appearance of the webpage,
 
 **TAKING IT FURTHER** - 
 Although none of the items here are required, they are useful features that you might choose to add to the project if you wanted to push things further than the minimum.
-▶ Make a web interface for store employees to add/edit products.
-▶ Add functionality that allows for customization of various properties of products upon ordering. Some examples of this would be variable colors/sizes.
-▶ Add functionality that allows for a store employee to add promo codes that can be used when ordering to affect the final price.
-▶ Add functionality for store employees to set up temporary sales during some time period. For example, a Black Friday sale that is 20% off on some item for one day only.
-▶ Design a system of loyalty reward points for ordering that can be redeemed later.
-▶ Design a wishlist system where users can keep track of items they’d like to order at a later date.
+1. Make a web interface for store employees to add/edit products.
+2. Add functionality that allows for customization of various properties of products upon ordering. Some examples of this would be variable colors/sizes.
+3. Add functionality that allows for a store employee to add promo codes that can be used when ordering to affect the final price.
+4. Add functionality for store employees to set up temporary sales during some time period. For example, a Black Friday sale that is 20% off on some item for one day only.
+5. Design a system of loyalty reward points for ordering that can be redeemed later.
+6. Design a wishlist system where users can keep track of items they’d like to order at a later date.
 
 **SOME NOTES** - 
-▶ This is a group project, and you need to be able to coordinate with the others in your group. This is the reason that NIU provides Teams, so I would encourage you to coordinate through it, though this is not a requirement. I know that some of you prefer to use Discord/Telegram/etc. and this is not a problem, but remember that each group is responsible for implementing their own application: code should not be shared between groups, and any discussions should be held in a setting not viewable by people outside of the group.
-▶ This project is designed to give everyone a chance to apply their knowledge, and to learn where the gaps in that knowledge may be. To that end, please make sure that all of your group members are involved in each of the steps. It might be easy to carry/be carried, but it is better for everyone if it’s actually a team effort. I will be adding an individual submission portion at the end for a survey where you can rate the contribution level of each of your group members. For the most part, the group should succeed or fail as a whole, but there have been students that disappeared and never contributed in prior semesters, and I do not wish to allow those students to be rewarded for their “stealth”.
-▶ I would recommend setting up some sort of version control repository (git is one that is commonly used) to coordinate the coding between members of your group. If you move the database login information into a separate file that is included, you can minimize the amount of code that needs to change between users as they independently test/develop. Students in the past have set up GitHub repos for their group to great effect. Make sure, however, that only your group members have access to the repo.
+1. This is a group project, and you need to be able to coordinate with the others in your group. This is the reason that NIU provides Teams, so I would encourage you to coordinate through it, though this is not a requirement. I know that some of you prefer to use Discord/Telegram/etc. and this is not a problem, but remember that each group is responsible for implementing their own application: code should not be shared between groups, and any discussions should be held in a setting not viewable by people outside of the group.
+2. This project is designed to give everyone a chance to apply their knowledge, and to learn where the gaps in that knowledge may be. To that end, please make sure that all of your group members are involved in each of the steps. It might be easy to carry/be carried, but it is better for everyone if it’s actually a team effort. I will be adding an individual submission portion at the end for a survey where you can rate the contribution level of each of your group members. For the most part, the group should succeed or fail as a whole, but there have been students that disappeared and never contributed in prior semesters, and I do not wish to allow those students to be rewarded for their “stealth”.
+3. I would recommend setting up some sort of version control repository (git is one that is commonly used) to coordinate the coding between members of your group. If you move the database login information into a separate file that is included, you can minimize the amount of code that needs to change between users as they independently test/develop. Students in the past have set up GitHub repos for their group to great effect. Make sure, however, that only your group members have access to the repo.
 
 **WHAT TO TURN IN?** - 
 Submit, via Blackboard (one submission per group), the following:
