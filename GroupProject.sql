@@ -17,7 +17,7 @@ CREATE TABLE Order_Info(OrderID INT AUTO_INCREMENT PRIMARY KEY, CustomerID INT, 
 
 CREATE TABLE Promo_Code(PromocodeID INT AUTO_INCREMENT PRIMARY KEY, discountpercent INT, ExpiryDate VARCHAR(10));
 
-CREATE TABLE Order_Status(TrackingID INT AUTO_INCREMENT PRIMARY KEY, ShippingPrice FLOAT, Carrier VARCHAR(20));
+CREATE TABLE Order_Status(OrderStatID INT AUTO_INCREMENT PRIMARY KEY, ShippingPrice FLOAT, Carrier VARCHAR(20));
 
 -- one-to-one relationship tables
 -- HAVE NOT DONE YET
