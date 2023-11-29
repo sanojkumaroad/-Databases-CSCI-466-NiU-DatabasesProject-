@@ -48,31 +48,27 @@
 		</form>
 
 		<?php
-                        $username="z1976871";
-                        $password="2004May19";
-			$promo = 'SAVE5';
-			try{
-				$dsn = "mysql:host=courses;dbname=z1976871";
-                               	$pdo = new PDO($dsn, $username, $password);
-			}
-                       	catch(PDOException $e){
-                               	echo "Connection to database failed: " . $e->getMessage();
-                       	}
+                       $username="z1976871";
+                       $password="2004May19";
 
-			$prepared=$pdo->prepare('SELECT discountpercent FROM PromoCode WHERE code = ?');
-                        $prepared->execute([$promo]);
-                        $result=$prepared->fetch(PDO::FETCH_ASSOC);
+                        $promo = $_POST['promo'];
 
-			$discount = 0;
-
-			
-                        echo $promo;
-
-                	foreach($result as $row)
-                        {
-                                $discount = $row[0];
+                        try{
+                                $dsn = "mysql:host=courses;dbname=z1976871";
+                                $pdo = new PDO($dsn, $username, $password);
+                        }
+                        catch(PDOException $e){
+                                echo "Connection to database failed: " . $e->getMess>
                         }
 
+                        $prepared=$pdo->prepare('SELECT discountpercent FROM PromoCode WHERE code = ?');
+                        $prepared->execute([$promo]);
+                        $result=$prepared->fetchAll();
+
+                        foreach($result as $row)
+                        {
+                                 $discount = $row[0];
+                        }
                 ?>
 
 		 <script>
