@@ -59,24 +59,26 @@
                                 echo "Connection to database failed: " . $e->getMessage();
                         }
 
-                        $promo=$_POST['promo'];
-
-                        $prepared=$pdo->prepare('SELECT discountpercent FROM PromoCode WHERE code = ?');
-                        $prepared->execute([$promo]);
-                        $result=$prepared->fetchAll();
-
-                        if($result)
+                        if(empty($_POST['promo']) == false)
                         {
-                                foreach($result as $row)
+                                $promo = $_POST['promo'];
+
+                                $prepared=$pdo->prepare('SELECT discountpercent FROM PromoCode WHERE code = ?');
+                                $prepared->execute([$promo]);
+                                $result=$prepared->fetchAll();
+
+                                if($result)
                                 {
-                                        $discount = $row[0];
+                                        foreach($result as $row)
+                                        {
+                                                $discount = $row[0];
+                                        }
                                 }
-                        }
-                        else
-                        {
-                                $discount = 0;
-                        }
-
+                                else
+                                {
+                                        $discount = 0;
+                                }
+                	}
                 ?>
 
 		 <script>
