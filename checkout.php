@@ -65,12 +65,13 @@
 
 			$discount = 0;
 
-			if($result)
-			{
-				$discount = $row;
-			}
+			
+                        echo $promo;
 
-			echo $discount;
+                	foreach($result as $row)
+                        {
+                                $discount = $row[0];
+                        }
 
                 ?>
 
