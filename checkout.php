@@ -61,7 +61,7 @@
 
                         $promo=$_POST['promo'];
 
-                        $prepared=$pdo->prepare('SELECT discountpercent FROM PromoCode WHERE>
+                        $prepared=$pdo->prepare('SELECT discountpercent FROM PromoCode WHERE code = ?');
                         $prepared->execute([$promo]);
                         $result=$prepared->fetchAll();
 
