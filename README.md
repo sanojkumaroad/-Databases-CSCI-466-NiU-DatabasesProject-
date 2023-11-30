@@ -23,7 +23,7 @@ Once the order has been submitted, the items ordered should be associated with t
 The page showing the cart should have a link to another page that allows them to check out.
 
 **CHECKING OUT** - 
-The checkout page should allow the user to enter a shipping address, and billing information (see the note below). It will show them, at a minimum, the
+The checkout page should allow the user to enter a shipping address, and billing information. It will show them, at a minimum, the
 total value of the items in their cart, and allow them to finish submitting an order.
 **Note**: AT NO POINT SHOULD ANY ACTUAL CREDIT CARD INFORMATION BE ENTERED. MAKE UP FAKE DATA AND KEEP YOUR BILLING INFO SAFE.
 
