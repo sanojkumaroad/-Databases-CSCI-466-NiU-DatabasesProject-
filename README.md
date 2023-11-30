@@ -25,7 +25,7 @@ The page showing the cart should have a link to another page that allows them to
 **CHECKING OUT** - 
 The checkout page should allow the user to enter a shipping address, and billing information (see the note below). It will show them, at a minimum, the
 total value of the items in their cart, and allow them to finish submitting an order.
-Note: AT NO POINT SHOULD ANY ACTUAL CREDIT CARD INFORMATION BE ENTERED. MAKE UP FAKE DATA AND KEEP YOUR BILLING INFO SAFE.
+**Note**: AT NO POINT SHOULD ANY ACTUAL CREDIT CARD INFORMATION BE ENTERED. MAKE UP FAKE DATA AND KEEP YOUR BILLING INFO SAFE.
 
 **ORDERS** - 
 When an order is placed, the info on the order needs to be placed into the database. When an order goes into the system, it will be marked as “Processing”. This will be changed as the store workers fulfill orders. Your application will need it to generate three different views:
