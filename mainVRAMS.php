@@ -58,12 +58,15 @@
   </head>
   <body>
     <div class="navbar" id="navbar">
-      <a href="#home"><img src = "VRAMS Logo.png" alt = "VRAMS logo" width = "200" height = "150">HOME</a>
-      <a href="#shop">Shop</a>
-      <a href="#about">About Us</a>
-      <a href="#contact">Contact</a>
-      <a href="#cart" style="float: right;"><img src="shopping-cart-icon.png" alt="Shopping Cart" style="width: 20px; height: 20px;"></a>
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
+    
+      	    <a href="mainVRAMS.php"><img src = "VRAMS Logo.png" alt = "VRAMS logo" width = "200" height = "150"></a
+>           <a href="shop.php">Shop</a>
+	    <a href="InventoryCheck.php">Inventory</a>
+            <a href="AboutUs.php">About Us</a>
+            <a href="Contact.php">Contact</a>
+            <a href="cart.php">Cart</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
+    
     </div>
     
     <h1 style = "font - family:Bernard MT"> VRAMS: Selling Quality Shoes </h1>
