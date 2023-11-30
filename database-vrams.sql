@@ -2,6 +2,9 @@
 -- Group Name: VRAMS
 -- Project Name: Online Shoe Store 
 
+--> Wipes the data and delete all the tables at once.
+--> DROP TABLE IF EXISTS Order_Tracking, Customer_Billing, Order_Discount, Order_Info, Promo_Code, Order_Status, Products, User_Employee, User_Customer;
+
 --> Creating Entity Tables
 CREATE TABLE User_Customer(CustomerID INT AUTO_INCREMENT PRIMARY KEY, Address VARCHAR(300), Password VARCHAR(35), Email VARCHAR(75), PhoneNumber VARCHAR(15), FirstName VARCHAR(50), LastName VARCHAR(50));
 CREATE TABLE User_Employee(EmployeeID INT AUTO_INCREMENT PRIMARY KEY, Address VARCHAR(300), Password VARCHAR(10), Email VARCHAR(75), PhoneNumber VARCHAR(15), FirstName VARCHAR(50), LastName VARCHAR(50));
