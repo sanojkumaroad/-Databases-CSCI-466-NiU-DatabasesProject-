@@ -11,7 +11,7 @@ CREATE TABLE User_Employee(EmployeeID INT AUTO_INCREMENT PRIMARY KEY, Address VA
 CREATE TABLE Products(ProductID INT AUTO_INCREMENT PRIMARY KEY, ProductName VARCHAR(50), ProductDescription VARCHAR(200), Qty INT, ProductPrice FLOAT);
 CREATE TABLE Order_Info(OrderID INT AUTO_INCREMENT PRIMARY KEY, CustomerID INT, ProductID INT, OrderDate VARCHAR(10), Status VARCHAR(20), TotalAmount FLOAT, FOREIGN KEY(CustomerID) REFERENCES User_Customer(CustomerID), FOREIGN KEY(ProductID) REFERENCES Products(ProductID));
 CREATE TABLE Promo_Code(PromoCodeID INT AUTO_INCREMENT PRIMARY KEY, DiscountPercent INT, ExpiryDate VARCHAR(10));
-CREATE TABLE Order_Status(OrderStatID INT AUTO_INCREMENT PRIMARY KEY, ShippingPrice FLOAT, Carrier VARCHAR(20));
+CREATE TABLE Order_Status(OrderStatusID INT AUTO_INCREMENT PRIMARY KEY, OrderID INT, Carrier VARCHAR(20), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID) );
 
 --> Creating 1-1 Relationship Tables
 CREATE TABLE Order_Tracking(OrderID INT,  OrderStatID INT, ConfirmNumber INT NOT NULL UNIQUE, PRIMARY KEY (OrderID, OrderStatID), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID), FOREIGN KEY(OrderStatID) REFERENCES Order_Status(OrderStatID));
