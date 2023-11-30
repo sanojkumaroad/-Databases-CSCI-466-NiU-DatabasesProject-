@@ -7,14 +7,14 @@ if(!$connection)
   die("Connection error");
 }
 
-$database = mysqli_select_db($connection,"z1967049");
+$database = mysqli_select_db($connection,"z-number");
 
 if(!$database)
 {
  die("Database connection error");
 }
 
-$queryP = mysqli_query($connection, "select ProductID, product_name, product_price from Products");
+$queryP = mysqli_query($connection, "select ProductID, ProductName, ProductPrice from Products");
 $queryID = mysqli_query($connection, "select ProductID from Products");
 
 ?>
@@ -74,7 +74,7 @@ $queryID = mysqli_query($connection, "select ProductID from Products");
     {
  ?>
         <td> <?php echo $row['ProductID']; ?> </td>
-        <td> <?php echo $row['product_name']; ?> </td>
+        <td> <?php echo $row['ProductName']; ?> </td>
       </tr>
      <?php
     }?>
@@ -108,7 +108,7 @@ $queryID = mysqli_query($connection, "select ProductID from Products");
     if(isset($_GET["inventorysubmit"]) && $_GET["check_inventory"] != "NULL")
     {
         $comparison = $_GET["check_inventory"];
-        $queryINV = mysqli_query($connection, "Select ProductID, product_name, quantity from Products WHERE quantity $comparison 0;");
+        $queryINV = mysqli_query($connection, "Select ProductID, ProductName, Qty from Products WHERE quantity $comparison 0;");
 ?>
         <table border = 2 style = "background-color: white;">
         <tr>
@@ -121,8 +121,8 @@ $queryID = mysqli_query($connection, "select ProductID from Products");
         {?>
             <tr>
             <td> <?php echo $row['ProductID']; ?> </td>
-                     <td> <?php echo $row['product_name']; ?> </td>
-                    <td> <?php echo $row['quantity']; ?> </td>
+                     <td> <?php echo $row['ProductName']; ?> </td>
+                    <td> <?php echo $row['Qty']; ?> </td>
             </tr>
     <?php    } ?>
         </table>
