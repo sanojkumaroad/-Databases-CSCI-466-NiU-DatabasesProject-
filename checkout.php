@@ -1,121 +1,168 @@
+<!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title>Checkout Page</title>
-        <style>
-			/* Apple these margins to all the input types */
-            input {
-                margin-top:2px; 
-                margin-bottom:2px;
-            }
-        </style>
-	</head>
-	<body>
-		<h1>Checkout</h1>
-		<hr>
-		<form method="post">
-			<br>
-			<h3>Contact Information</h3>
-			<input type="email" placeholder="Email Address" name="email" required> <br>
-			<input type="tel" placeholder="Phone Number" pattern="[0-9]{10}" name="number" required><br>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f4f4f4;
+			}
 
-			<h3>Delivery Information</h3>
-			<input type="text" placeholder="First Name" name="fname" required>
-			<input type="text" placeholder="Last Name" name="lname" required><br>
-			<input type="text" placeholder="Shipping Address" size="46" name="address" required><br>
-			<input type="text" placeholder="City" size="12" name="city" required>
-			<input type="text" placeholder="State" size="12"name="state" required>
-			<input type="text" placeholder="Zip Code" size="10" name="zip" maxlength="5"required><br>
+			header {
+				background-color:#333;
+				color:#fff;
+				text-align: center;
+			}
 
-			<h3>Payment Information</h3>
-			<input type="text" placeholder="Card Number" size="26" name="cardnumber" maxlength="19" required><br>
-			<input type="text" placeholder="Expiration Date" size="10" name="expdate" maxlength="5" required>
-			<input type="text" placeholder="Security Code" size="10" name="code" maxlength="4" required><br>
-			<input type="text" placeholder="Name on card" size="26" name="cardname" required>
+			input {
+				margin-top:2px;
+				margin-bottom:2px;
+			}
 
-			<h3>Billing Address</h3>
-			<input type="text" placeholder="First Name" name="billingFName" required>
-            <input type="text" placeholder="Last Name" name="billingLname" required><br>
-            <input type="text" placeholder="Shipping Address" size="46" name="billingAddress" required><br>
-            <input type="text" placeholder="City" size="12" name="billingCity" required>
-            <input type="text" placeholder="State" size="12"name="billingState" required>
-            <input type="text" placeholder="Zip Code" size="10" name="billingZip" maxlength="5"required><br>
+			.navbar {
+				background-color:#333;
+				overflow:hidden;
+			}
 
-			<h4>Promo Code</h4>
-			<input type="text" placeholder="Promo Code" id="promoCode" name="promo">
-			<input type="button" onclick="validate()" name="submitpromo" value="Apply Promo">
+			.navbar a {
+				float: left;
+				display: block;
+				color: white;
+				text-align: center;
+				padding: 14px 16px;
+				text-decoration: none;
+			}
 
-			<br>
-			<h3>Order Summary</h3>
-			<p id="subtotal"><p>
-			<p id="discount"><p>
-			<p id="shipping"><p>
-			<p id="total"><p>
+			.navbar a:hover {
+				background-color:#ddd;
+				color:black;
+			}
 
-			<input type="submit" name="submit" value="Place Order" style="width:200px"><br>
-		</form>
+			.navbar .icon {
+				display: none;
+			}
 
-		<?php
-            $username="z1976871";
-            $password="2004May19";
-
-            try {
-                $dsn = "mysql:host=courses;dbname=z1976871";
-                $pdo = new PDO($dsn, $username, $password);
-            }
-            
-            catch(PDOException $e) {
-                echo "Connection to database failed: " . $e->getMessage();
-            }
-
-            if(empty($_POST['promo']) == false) {
-                $promo = $_POST['promo'];
-
-                $prepared=$pdo->prepare('SELECT discountpercent FROM PromoCode WHERE code = ?');
-                $prepared->execute([$promo]);
-                $result=$prepared->fetchAll();
-
-                if($result) {
-                    foreach($result as $row) {
-                        $discount = $row[0];
-                    }
-                }
-                else {
-                    $discount = 0;
-                }
-            }
-        ?>
-
-		<script>
-			subtotal = 15;
-            document.getElementById("subtotal").innerHTML="Subtotal: " + subtotal;
-            shipping = 3.99;
-            document.getElementById("shipping").innerHTML="Shipping: " + shipping;
-            calculation = shipping + subtotal;
-            total = calculation.toFixed(2);
-            document.getElementById("total").innerHTML="Total: " + total;
-		</script>
-
-		<script>
-			function validate() {
-				if(document.getElementById("promo").value.length == 0) {
-					alert("Please enter a promo code");
-				}
-				else {
-					savings = "<?php echo"$discount"?>";
-					if(savings == 0) {
-						//alert("The promo code you entered is invalid. Please try again.");
-						alert(promoCode);
-					}
-					else {
-						document.getElementById("discount").innerHTML="Discount: " + "-" + savings + "%" + " (Applied to subtotal)";
-						newSubTotal = subtotal - (subtotal*(savings/100));
-						document.getElementById("subtotal").innerHTML="Subtotal: " + newSubTotal;
-						newTotal = newSubTotal + shipping;
-						newTotal = newTotal.toFixed(2);
-						document.getElementById("total").innerHTML="Total: " + newTotal;
-					}
+			@media screen and (max-width: 600px) {
+				.navbar a:not(:first-child) {display: none;}
+				.navbar a.icon {
+					float: right;
+					display: block;
 				}
 			}
-        </script>
+
+			@media screen and (max-width: 600px) {
+				.navbar.responsive {position: relative;}
+				.navbar.responsive .icon {
+					position: absolute;
+					right: 0;
+					top: 0;
+				}
+				.navbar.responsive a {
+					float: none;
+					display: block;
+					text-align: left;
+				}
+			}
+
+			main {
+				justify-content: space-around;
+				padding: 20px;
+			}
+
+			.contact-us {
+				background-color: #333;
+				border = 1px solid #fff;
+				color: #fff;
+				padding: 20px;
+				margin: 10px;
+				text-align: center;
+			}
+
+			footer {
+				background-color: #333;
+				color: #fff;
+				text-align: center;
+				padding: 1em 0;
+			}
+
+			footer a {
+				color: #fff;
+				text-decoration: none;
+				margin: 0 15 px;
+			}
+		</style>
+	</head>
+	<body>
+		<?php
+			include 'db.php';
+
+			include 'cart_functions.php';
+		?>
+
+		<header>
+			<div class="navbar" id="navbar">
+				<a href="mainVRAMS.php"><img src = "VRAMS Logo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
+				<a href="shop.php">Shop</a>
+	    			<a href="InventoryCheck.php">Inventory</a>
+            			<a href="AboutUs.php">About Us</a>
+            			<a href="Contact.php">Contact</a>
+            			<a href="cart.php">Cart</a>
+			</div>
+		</header>
+
+		<main>
+			<h1>Checkout</h1>
+			<hr>
+			<form method="post" action="confirmation.php">
+				<h3>Contact Information</h3>
+				<input type="email" placeholder="Email Address" size="25" name="email" required/> <br>
+				<input type="tel" placeholder="Phone Number (123-456-7890)" size="25" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="number" required/><br>
+
+				<h3>Delivery Information</h3>
+				<input type="text" placeholder="First Name" name="fname" required/>
+				<input type="text" placeholder="Last Name" name="lname" required/><br>
+				<input type="text" placeholder="Shipping Address" size="46" name="address" required/><br>
+				<input type="text" placeholder="City" size="12" name="city" required/>
+				<input type="text" placeholder="State" size="12"name="state" required/>
+				<input type="numeric" placeholder="Zip Code" size="10" name="zip" maxlength="5" required/><br>
+
+				<h3>Payment Information</h3>
+				<input type="numeric" placeholder="Card Number" size="30" name="cardnumber" maxlength="19" required/><br>
+				<input type="text" placeholder="Exp. Date (MM/YY)" size="13" pattern = "[0-9]{2}/[0-9]{2}" name="expdate" maxlength="5" required/>
+				<input type="numeric" placeholder="Security Code" size="11" name="code" maxlength="4" required/><br>
+				<input type="text" placeholder="Name on card" size="30" name="cardname" required/>
+
+				<h3>Billing Address</h3>
+				<input type="text" placeholder="First Name" name="billingFName" required/>
+                        	<input type="text" placeholder="Last Name" name="billingLname" required/><br>
+                        	<input type="text" placeholder="Shipping Address" size="46" name="billingAddress" required/><br>
+                        	<input type="text" placeholder="City" size="12" name="billingCity" required/>
+                        	<input type="text" placeholder="State" size="12"name="billingState" required/>
+                        	<input type="numeric" placeholder="Zip Code" size="10" name="billingZip" maxlength="5" required/><br>
+
+				<h3>Order Summary</h3>
+				<p id="subtotal">Subtotal: $<?php echo number_format(calculateSubtotal(),2);?></p>
+				<p id="discount"></p>
+				<p id="shipping">Shipping & Handling: $0.00</p>
+				<p id="total">Total: $<?php echo number_format(calculateTotal(),2); ?></p>
+
+				<input type="submit" name="submit" value="Place Order" style="width:200px"><br>
+			</form>
+		</main>
+
+		<footer>
+			<div class="contact-us">
+        			<h2>Contact Us</h2>
+        			<p>Email: info@vramsshoestore.com</p>
+        			<p>Phone: (555) 123-4567</p>
+    			</div>
+    			<p>All rights reserved. © 2023 VRAMS Shoe Store</p>
+		</footer>
+
+		<?php
+
+		?>
+
 	</body>
 </html>
