@@ -1,4 +1,4 @@
-<?php
+<!-- VRAMS MAIN PAGE -->
 
 //Opening a connection with our database and creating queries needed
 $connection = mysqli_connect('courses', 'z1908204', '2001Nov05');
@@ -20,7 +20,6 @@ $queryID = mysqli_query($connection, "select ProductID from Products");
 ?>
 
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +27,6 @@ $queryID = mysqli_query($connection, "select ProductID from Products");
     <title>Inventory. VRAMS Shoe Store.</title>
     <link rel="stylesheet" href="styles.css">
     
-<!--         "I DELETED THIS PART BUT INCLUDED OUR HEADER SECTION INSTEAD! SO DELETE THIS MESSAGE ONCE YOU UNDERSTAND WHAT I DID HERE!!!   Used to split page in half and costimize color          -->
 <style>
         body {
             font-family: Arial, sans-serif;
@@ -126,8 +124,10 @@ $queryID = mysqli_query($connection, "select ProductID from Products");
 
 </style>
 
+<!DOCTYPE HTML>
+<HTML>
 
-    <!--        Setting left to show list of all products        -->
+  <!--        Setting left to show list of all products        -->
 
 <body>
 
@@ -270,3 +270,13 @@ $queryID = mysqli_query($connection, "select ProductID from Products");
 
 </body>
 </html>
+
+<head>
+<title> VRAMS </title>
+</head>
+
+<img src = "VRAMS Logo.png" alt = "VRAMS logo" width = "200" height = "150">
+
+<h1 style = "font - family:Bernard MT"> Selling Quality Shoes to All <h1>
+<img src = "MainPicture.png" alt = "shoe styles" width = 100% height = "300">
+</HTML>
