@@ -3,113 +3,30 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Checkout Page</title>
-		<style>
-			body {
-				font-family: Arial, sans-serif;
-				background-color: #f4f4f4;
-			}
-
-			header {
-				background-color:#333;
-				color:#fff;
-				text-align: center;
-			}
-
-			input {
-				margin-top:2px;
-				margin-bottom:2px;
-			}
-
-			.navbar {
-				background-color:#333;
-				overflow:hidden;
-			}
-
-			.navbar a {
-				float: left;
-				display: block;
-				color: white;
-				text-align: center;
-				padding: 14px 16px;
-				text-decoration: none;
-			}
-
-			.navbar a:hover {
-				background-color:#ddd;
-				color:black;
-			}
-
-			.navbar .icon {
-				display: none;
-			}
-
-			@media screen and (max-width: 600px) {
-				.navbar a:not(:first-child) {display: none;}
-				.navbar a.icon {
-					float: right;
-					display: block;
-				}
-			}
-
-			@media screen and (max-width: 600px) {
-				.navbar.responsive {position: relative;}
-				.navbar.responsive .icon {
-					position: absolute;
-					right: 0;
-					top: 0;
-				}
-				.navbar.responsive a {
-					float: none;
-					display: block;
-					text-align: left;
-				}
-			}
-
-			main {
-				justify-content: space-around;
-				padding: 20px;
-			}
-
-			.contact-us {
-				background-color: #333;
-				border = 1px solid #fff;
-				color: #fff;
-				padding: 20px;
-				margin: 10px;
-				text-align: center;
-			}
-
-			footer {
-				background-color: #333;
-				color: #fff;
-				text-align: center;
-				padding: 1em 0;
-			}
-
-			footer a {
-				color: #fff;
-				text-decoration: none;
-				margin: 0 15 px;
-			}
-		</style>
+        <link rel="stylesheet" href="css/stylesCheckout.css">
 	</head>
+
 	<body>
 		<?php
-			include 'db.php';
+			include 'connection.php';
+            // $connection is available and connected to the database.
+            // Perform your database operations using $connection.
 
 			include 'cart_functions.php';
 		?>
 
-		<header>
-			<div class="navbar" id="navbar">
-				<a href="mainVRAMS.php"><img src = "VRAMS Logo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
-				<a href="shop.php">Shop</a>
-	    			<a href="InventoryCheck.php">Inventory</a>
-            			<a href="AboutUs.php">About Us</a>
-            			<a href="Contact.php">Contact</a>
-            			<a href="cart.php">Cart</a>
-			</div>
-		</header>
+        <header>
+            <div class="navbar" id="navbar">
+                <a href="mainVRAMS.php"><img src = "VRAMS Logo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
+                <a href="shop.php">Shop</a>  
+                <a href="InventoryCheck.php">Inventory</a>
+                <a href="AboutUs.php">About Us</a>
+                <a href="Contact.php">Contact</a>
+                <a href="Login.php">Login/Sign Up</a>
+                <a href="cart.php">Cart</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
+            </div>
+        </header>
 
 		<main>
 			<h1>Checkout</h1>
@@ -135,11 +52,11 @@
 
 				<h3>Billing Address</h3>
 				<input type="text" placeholder="First Name" name="billingFName" required/>
-                        	<input type="text" placeholder="Last Name" name="billingLname" required/><br>
-                        	<input type="text" placeholder="Shipping Address" size="46" name="billingAddress" required/><br>
-                        	<input type="text" placeholder="City" size="12" name="billingCity" required/>
-                        	<input type="text" placeholder="State" size="12"name="billingState" required/>
-                        	<input type="numeric" placeholder="Zip Code" size="10" name="billingZip" maxlength="5" required/><br>
+                <input type="text" placeholder="Last Name" name="billingLname" required/><br>
+                <input type="text" placeholder="Shipping Address" size="46" name="billingAddress" required/><br>
+                <input type="text" placeholder="City" size="12" name="billingCity" required/>
+                <input type="text" placeholder="State" size="12"name="billingState" required/>
+                <input type="numeric" placeholder="Zip Code" size="10" name="billingZip" maxlength="5" required/><br>
 
 				<h3>Order Summary</h3>
 				<p id="subtotal">Subtotal: $<?php echo number_format(calculateSubtotal(),2);?></p>
@@ -159,10 +76,5 @@
     			</div>
     			<p>All rights reserved. © 2023 VRAMS Shoe Store</p>
 		</footer>
-
-		<?php
-
-		?>
-
 	</body>
 </html>
