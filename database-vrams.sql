@@ -9,12 +9,12 @@
 CREATE TABLE User_Customer(CustomerID INT AUTO_INCREMENT PRIMARY KEY, Address VARCHAR(300), Password VARCHAR(35), Email VARCHAR(75), PhoneNumber VARCHAR(15), FirstName VARCHAR(50), LastName VARCHAR(50));
 CREATE TABLE User_Employee(EmployeeID INT AUTO_INCREMENT PRIMARY KEY, Address VARCHAR(300), Password VARCHAR(10), Email VARCHAR(75), PhoneNumber VARCHAR(15), FirstName VARCHAR(50), LastName VARCHAR(50));
 CREATE TABLE Products(ProductID INT AUTO_INCREMENT PRIMARY KEY, ProductName VARCHAR(50), ProductDescription VARCHAR(200), Qty INT, ProductPrice FLOAT);
-CREATE TABLE Order_Info(OrderID INT AUTO_INCREMENT PRIMARY KEY, CustomerID INT, ProductID INT, OrderDate VARCHAR(10), Status VARCHAR(20), TotalAmount FLOAT, FOREIGN KEY(CustomerID) REFERENCES User_Customer(CustomerID), FOREIGN KEY(ProductID) REFERENCES Products(ProductID));
+CREATE TABLE Orders(OrderID INT AUTO_INCREMENT PRIMARY KEY, CustomerID INT, OrderDate DATETIME, OrderTotal FLOAT, OrderStatus VARCHAR(50), FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID));
+CREATE TABLE Order_Item(OrderItemID INT AUTO_INCREMENT PRIMARY KEY, OrderID INT, ProductID INT, ItemQty INT, SUBTOTAL FLOAT, FOREIGN KEY (OrderID) REFERENCES Orders(OrderID), FOREIGN KEY (ProductID) REFERENCES Products(ProductID));
 CREATE TABLE Promo_Code(PromoCodeID INT AUTO_INCREMENT PRIMARY KEY, DiscountPercent INT, ExpiryDate VARCHAR(10));
-CREATE TABLE Order_Status(OrderStatID INT AUTO_INCREMENT PRIMARY KEY, ShippingPrice FLOAT, Carrier VARCHAR(20));
 
 --> Creating 1-1 Relationship Tables
-CREATE TABLE Order_Tracking(OrderID INT,  OrderStatID INT, ConfirmNumber INT NOT NULL UNIQUE, PRIMARY KEY (OrderID, OrderStatID), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID), FOREIGN KEY(OrderStatID) REFERENCES Order_Status(OrderStatID));
+CREATE TABLE Order_Tracking(TrackingID VARCHAR(11) PRIMARY KEY, OrderID INT, TrackingStatus VARCHAR(50), LastUpdateDate DATETIME, FOREIGN KEY (OrderID) REFERENCES Orders(OrderID));
 CREATE TABLE Customer_Billing(OrderID INT PRIMARY KEY, CustomerID INT, CardName VARCHAR(50), CardNumber INT NOT NULL, CardExpiration VARCHAR(5), CVV VARCHAR(3), BillingAddress VARCHAR(300), FOREIGN KEY(CustomerID) REFERENCES User_Customer(CustomerID), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID));
 CREATE TABLE Order_Discount(OrderID INT, PromoCodeID INT, PRIMARY KEY (OrderID, PromoCodeID), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID), FOREIGN KEY(PromoCodeID) REFERENCES Promo_Code(PromoCodeID));
 
