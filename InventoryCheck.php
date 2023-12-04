@@ -101,13 +101,45 @@
                 <input type="submit" value="SUBMIT" name="addsubmit">
             </form>
 
-            <?php
-                // PHP Code to add more to the quantity of the product selected
-                if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["addsubmit"])) {
-                    $prod = $_POST['add_inventory'];
-                    $addto = $_POST['addsubmit'];
-                }
-            ?>
+            
+        // PHP Code to add more to quantity of product selected
+<?php
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["addsubmit"]))
+    {
+        $prod = $_POST['add_inventory'];
+        $addto = $_POST['add'];
+
+        $queryADD = mysqli_query($connection, "UPDATE Products SET Qty = Qty + '$addto' WHERE ProductID = '$prod'");
+        $queryDisplayADD =  mysqli_query($connection, "SELECT ProductID, ProductName, Qty from Products");
+
+
+
+?>
+
+        <h4> Product info after adding more to quantity </h4>
+        <table border="2">
+
+           <tr>
+           <th> Product <br> ID </th>
+           <th> Quantity </th>
+           <th> Name </th>
+           </tr>
+<?php
+        while($row = mysqli_fetch_array($queryDisplayADD,MYSQLI_ASSOC))
+        { ?>
+            <tr>
+            <td> <?php echo $row['ProductID']; ?> </td>
+                     <td> <?php echo $row['ProductName']; ?> </td>
+                    <td> <?php echo $row['Qty']; ?> </td>
+            </tr>
+    <?php    } ?>
+        </table>
+<?php
+    }
+
+?>
+
+
 
             <!-- Table that links each product to its product details page -->
             <h4> Click link to view product details </h4>
