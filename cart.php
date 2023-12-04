@@ -100,7 +100,10 @@
         
         <script>
             function applyPromoCode() {
-                // apply promo code
+                if(document.getElementById('promo_code').value.length == 0)
+                {
+                        alert("Please enter a promo code.");
+                }
             }
 
         </script>
