@@ -64,22 +64,22 @@
 	<div class="user-info">
 		<div class="info-section">
 			<h3>Contact Information</h3>
-			<p><?php echo $email;?></p>
-			<p><?php echo $number;?></p>
+			<p class="info-data"><?php echo $email;?></p>
+			<p class="info-data"><?php echo $number;?></p>
 		</div>
 		<div class="info-section">
 			<h3>Delivery Information</h3>
-			<p><?php echo $fname;?> <?php echo $lname;?></p>
-			<p><?php echo $address;?></p>
-			<p><?php echo $city;?>, <?php echo $state;?> <?php echo $zip;?></p>
+			<p class="info-data"><?php echo $fname;?> <?php echo $lname;?></p>
+			<p class="info-data"><?php echo $address;?></p>
+			<p class="info-data"><?php echo $city;?>, <?php echo $state;?> <?php echo $zip;?></p>
 		</div>
 		<div class="info-section">
 			<h3>Order Summary</h3>
-			<p>Subtotal: <?php echo number_format(calculateSubtotal(), 2);?></p>
-			<p>Shipping: $0.00</p>
-			<p>Tax: <?php echo number_format(calculateTax(), 2); ?></p>
-			<p>Total: <?php echo number_format(calculateTotal(),2);?></p>
-			<p>Items: <?php echo count($cartItems);?></p>
+			<p class="info-data">Subtotal: <?php echo number_format(calculateSubtotal(), 2);?></p>
+			<p class="info-data">Shipping: $0.00</p>
+			<p class="info-data">Tax: <?php echo number_format(calculateTax(), 2); ?></p>
+			<p class="info-data">Total: <?php echo number_format(calculateTotal(),2);?></p>
+			<p class="info-data">Items: <?php echo count($cartItems);?></p>
 		</div>
 	</div>
 </main>
