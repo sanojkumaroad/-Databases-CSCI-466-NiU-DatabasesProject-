@@ -21,7 +21,7 @@
             $trackingID = $_POST['tracking_id'];
 
             // Prepare and execute the SQL query
-            $stmt = $pdo->prepare("
+            $stmt = $connection->prepare("
                 SELECT Order_Tracking.TrackingID, Order_Tracking.TrackingStatus, Orders.OrderID, Orders.OrderDate, Orders.OrderTotal, Orders.OrderStatus
                 FROM Order_Tracking
                 JOIN Orders ON Order_Tracking.OrderID = Orders.OrderID
