@@ -36,15 +36,6 @@
 
 
 
-        
-
-
-
-    <h3> Description:  <?php echo $result2 ?> </h3><br>
-    <h3> Quantity:  <?php echo $result3 ?> </h3><br>
-    <h3> Price: $ <?php echo $result4 ?> </h3><br>
-
-
 
 	<h2> Add to Cart </h2>
 	<form action="balletflats.php" method="post">
