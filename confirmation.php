@@ -75,10 +75,10 @@
 		</div>
 		<div class="info-section">
 			<h3>Order Summary</h3>
-			<p class="info-data">Subtotal: <?php echo number_format(calculateSubtotal(), 2);?></p>
+			<p class="info-data">Subtotal: $<?php echo number_format(calculateSubtotal(), 2);?></p>
 			<p class="info-data">Shipping: $0.00</p>
-			<p class="info-data">Tax: <?php echo number_format(calculateTax(), 2); ?></p>
-			<p class="info-data">Total: <?php echo number_format(calculateTotal(),2);?></p>
+			<p class="info-data">Tax: $<?php echo number_format(calculateTax(), 2); ?></p>
+			<p class="info-data">Total: $<?php echo number_format(calculateTotal(),2);?></p>
 			<p class="info-data">Items: <?php echo count($cartItems);?></p>
 		</div>
 	</div>
