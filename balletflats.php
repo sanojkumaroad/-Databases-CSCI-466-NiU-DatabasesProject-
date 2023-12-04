@@ -25,7 +25,7 @@
 
     <?php
 
-    $queryP = mysqli_query($connection, "select ProductName, ProductPrice, ProductDescription, Qty from Products WHERE ProductName = 'High-Fashion Heels'");
+    $queryP = mysqli_query($connection, "select ProductName, ProductPrice, ProductDescription, Qty from Products WHERE ProductName = 'Ballet Flats'");
     while($row = mysqli_fetch_array($queryP, MYSQLI_ASSOC)) { 
      ?>
 	<h3> Name: </h3> <?php echo $row['ProductName']; ?> <br>
