@@ -24,13 +24,13 @@
 
 <?php
 
-    $queryP = mysqli_query($connection, "select product_name, product_price, product_description, quantity from Products WHERE product_name = 'High-Fashion Heels'");
+    $queryP = mysqli_query($connection, "select ProductName, ProductPrice, ProductDescription, Qty from Products WHERE ProductName = 'High-Fashion Heels'");
     while($row = mysqli_fetch_array($queryP, MYSQLI_ASSOC)) { 
      ?>
-	<h3> Name: </h3> <?php echo $row['product_name']; ?> <br>
-	<h3> Name: </h3> <?php echo $row['product_price']; ?> <br>
-	<h3> Description: </h3> <?php echo $row['product_description']; ?> <br>
-	<h3> Quantity: </h3> <?php echo $row['quantity']; ?> <br>
+	<h3> Name: </h3> <?php echo $row['ProductName']; ?> <br>
+	<h3> Price: </h3> <?php echo $row['ProductPrice']; ?> <br>
+	<h3> Description: </h3> <?php echo $row['ProductDescription']; ?> <br>
+	<h3> Quantity: </h3> <?php echo $row['Qty']; ?> <br>
 <?php  } ?>
 
 
