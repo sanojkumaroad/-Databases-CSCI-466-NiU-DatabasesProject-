@@ -16,7 +16,7 @@
         // Perform your database operations using $connection.
 
         // Fetch outstanding orders from the Order table
-        $stmt = $pdo->query("SELECT * FROM Orders WHERE OrderStatus = 'Not Shipped'");
+        $stmt = mysqli_query($connection, "SELECT * FROM Orders WHERE OrderStatus = 'Not Shipped'");
         $outstandingOrders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if ($outstandingOrders) {
