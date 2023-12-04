@@ -13,6 +13,8 @@
             // Perform your database operations using $connection.
 
 			include 'cart_functions.php';
+
+			$cartItems=getCartItems();
 		?>
 
         <header>
@@ -29,7 +31,7 @@
         </header>
 
 		<main>
-			<h1>Checkout</h1>
+			<h1>Checkout (<?php echo count($cartItems);?> items)</h1>
 			<hr>
 			<form method="post" action="confirmation.php">
 				<h3>Contact Information</h3>
@@ -52,11 +54,11 @@
 
 				<h3>Billing Address</h3>
 				<input type="text" placeholder="First Name" name="billingFName" required/>
-                <input type="text" placeholder="Last Name" name="billingLname" required/><br>
-                <input type="text" placeholder="Shipping Address" size="46" name="billingAddress" required/><br>
-                <input type="text" placeholder="City" size="12" name="billingCity" required/>
-                <input type="text" placeholder="State" size="12"name="billingState" required/>
-                <input type="numeric" placeholder="Zip Code" size="10" name="billingZip" maxlength="5" required/><br>
+               			<input type="text" placeholder="Last Name" name="billingLname" required/><br>
+                		<input type="text" placeholder="Shipping Address" size="46" name="billingAddress" required/><br>
+                		<input type="text" placeholder="City" size="12" name="billingCity" required/>
+                		<input type="text" placeholder="State" size="12"name="billingState" required/>
+                		<input type="numeric" placeholder="Zip Code" size="10" name="billingZip" maxlength="5" required/><br>
 
 				<h3>Order Summary</h3>
 				<p id="subtotal">Subtotal: $<?php echo number_format(calculateSubtotal(),2);?></p>
