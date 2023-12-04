@@ -23,7 +23,7 @@
             $notes = $_POST['notes'];
 
             // Update the Order_Tracking table with fulfillment details
-            $updateStmt = $pdo->prepare("
+            $updateStmt = $connection->prepare("
                 UPDATE Order_Tracking
                 SET TrackingStatus = :tracking_status, TrackingStatus = :notes, LastUpdateDate = CURRENT_TIMESTAMP
                 WHERE OrderID = :order_id
@@ -36,7 +36,7 @@
         }
 
         // Fetch orders from the Order_Tracking table
-        $stmt = $pdo->query("
+        $stmt = $connection->query("
             SELECT Order_Tracking.OrderID, Orders.CustomerID, Orders.OrderDate, Orders.OrderTotal, Order_Tracking.TrackingStatus
             FROM Order_Tracking
             JOIN Orders ON Order_Tracking.OrderID = Orders.OrderID
