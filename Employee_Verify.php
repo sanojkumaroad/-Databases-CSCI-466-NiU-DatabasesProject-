@@ -1,18 +1,6 @@
 <?php
 
-//Opening a connection with our database and creating queries needed
-$connection = mysqli_connect('courses', 'z1967049', '1998Feb07');
-if(!$connection)
-{
-  die("Connection error");
-}
-
-$database = mysqli_select_db($connection,"z1967049");
-
-if(!$database)
-{
- die("Database connection error");
-}
+//Opening a connection with your DB here
 
 ?>
 
