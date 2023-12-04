@@ -24,34 +24,20 @@
 
     include 'connection.php';
 
-    $sql = "SELECT ProductName FROM Products WHERE ProductName = 'Soccer Pro Elite';";
-    $name = $pdo->query($sql);
-    $result1 = $name->fetch(PDO::FETCH_BOTH);
-
-
-    $sql = "SELECT ProductDescription FROM Products WHERE ProductName = 'Soccer Pro Elite';";
-    $description = $pdo->query($sql);
-    $result2 = $description->fetch(PDO::FETCH_BOTH);
-
-
-    $sql = "SELECT Qty FROM Products WHERE ProductName = 'Soccer Pro Elite';";
-    $qty = $pdo->query($sql);
-    $result3 = $qty->fetch(PDO::FETCH_BOTH);
-
-
-    $sql = "SELECT ProductPrice FROM Products WHERE ProductName = 'Soccer Pro Elite';";
-    $price = $pdo->query($sql);
-    $result4 = $price->fetch(PDO::FETCH_BOTH);
-
-
-        
 
 ?>
 
 
-    <h3> Description:  <?php echo $result2 ?> </h3><br>
-    <h3> Quantity:  <?php echo $result3 ?> </h3><br>
-    <h3> Price: $ <?php echo $result4 ?> </h3><br>
+   <?php
+
+    $queryP = mysqli_query($connection, "select ProductName, ProductPrice, ProductDescription, Qty from Products WHERE ProductName = 'Soccer Pro Elite'");
+    while($row = mysqli_fetch_array($queryP, MYSQLI_ASSOC)) { 
+     ?>
+	<h3> Name: </h3> <?php echo $row['ProductName']; ?> <br>
+	<h3> Price: </h3> <?php echo $row['ProductPrice']; ?> <br>
+	<h3> Description: </h3> <?php echo $row['ProductDescription']; ?> <br>
+	<h3> Quantity: </h3> <?php echo $row['Qty']; ?> <br>
+<?php  } ?>
 
 
 
