@@ -1,5 +1,6 @@
+<?php include 'connection.php';
+?>
 <html>
-
 
 
 <head>
@@ -14,44 +15,24 @@
 <b>
 
 
-    <h1> <center>Running Pro 3000</center> </h1>
+    <h1> <center> High-Fashion Heels </center> </h1>
     <center><img src="https://static.wixstatic.com/media/68c3d3_c6b1ed46c629401a9dc835f2d8d67d9c~mv2.jpg/v1/fill/w_256,h_256,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/68c3d3_c6b1ed46c629401a9dc835f2d8d67d9c~mv2.jpg" alt="Running Pro 3000"></center>
+
+
 
 
 
 <?php
 
+    $queryP = mysqli_query($connection, "select product_name, product_price, product_description, quantity from Products WHERE product_name = 'High-Fashion Heels'");
+    while($row = mysqli_fetch_array($queryP, MYSQLI_ASSOC)) { 
+     ?>
+	<h3> Name: </h3> <?php echo $row['product_name']; ?> <br>
+	<h3> Name: </h3> <?php echo $row['product_price']; ?> <br>
+	<h3> Description: </h3> <?php echo $row['product_description']; ?> <br>
+	<h3> Quantity: </h3> <?php echo $row['quantity']; ?> <br>
+<?php  } ?>
 
-    include 'connection.php';
-
-    $sql = "SELECT ProductName FROM Products WHERE ProductName = 'High-Fashion Heels';";
-    $name = $pdo->query($sql);
-    $result1 = $name->fetch(PDO::FETCH_BOTH);
-
-
-    $sql = "SELECT ProductDescription FROM Products WHERE ProductName = 'High-Fashion Heels';";
-    $description = $pdo->query($sql);
-    $result2 = $description->fetch(PDO::FETCH_BOTH);
-
-
-    $sql = "SELECT Qty FROM Products WHERE ProductName = 'High-Fashion Heels';";
-    $qty = $pdo->query($sql);
-    $result3 = $qty->fetch(PDO::FETCH_BOTH);
-
-
-    $sql = "SELECT ProductPrice FROM Products WHERE ProductName = 'High-Fashion Heels';";
-    $price = $pdo->query($sql);
-    $result4 = $price->fetch(PDO::FETCH_BOTH);
-
-
-        
-
-?>
-
-
-    <h3> Description:  <?php echo $result2 ?> </h3><br>
-    <h3> Quantity:  <?php echo $result3 ?> </h3><br>
-    <h3> Price: $ <?php echo $result4 ?> </h3><br>
 
 
 
