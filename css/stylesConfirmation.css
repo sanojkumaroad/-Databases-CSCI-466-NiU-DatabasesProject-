@@ -134,3 +134,18 @@
 			border-radius:5px;
 			width:25%
 		}
+
+.info-data a {
+    color: #007BFF; /* Change the color to your preference */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.info-data a:hover {
+    text-decoration: underline;
+}
+.info-data-tracking {
+    font-size: 1.2em; /* Adjust the font size as needed */
+    font-weight: bold;
+    text-align: center;
+}
