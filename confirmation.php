@@ -8,22 +8,29 @@
 <body>
 	<?php
 		include 'connection.php';
-		include 'cart_functions.php';
+		include 'confirmation_functions.php';
 
-        	$cartItems=getCartItems();
+        	$cartItems = getCartItems();
+        	$subtotal = calculateSubtotal();
+		$total = calculateTotal();
 
-	?>
-
-<header>
-	<div class="navbar" id="navbar">
-      	    <a href="mainVRAMS.php"><img src = "VRAMSLogo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
-	    <a href="shop.php">Shop</a>
-	    <a href="InventoryCheck.php">Inventory</a>
+		// Generate a unique tracking ID
+		$trackingId = generateTrackingId();
+?>
+    <header>
+        <div class="navbar" id="navbar">
+            <a href="mainVRAMS.php"><img src="VRAMSLogo.png" alt="VRAMS logo" width="200" height="150"></a>
+            <a href="product_list.php">Shop</a>
+            <a href="orderTracking.php">Track Order</a>
             <a href="AboutUs.php">About Us</a>
             <a href="Contact.php">Contact</a>
+            <a href="Login.php">Login/Sign Up</a>
+            <a href="InventoryCheck.php">Employee</a>
             <a href="cart.php">Cart</a>
-	</div>
-</header>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
+        </div>
+    </header>
+
 <main>
 	<?php
 		if(isset($_POST['fname']))
@@ -61,6 +68,30 @@
 	<h1><?php echo $thankYou; ?></h1>
 	<hr>
 	<h2 class="info-header">Order Confirmation</h2>
+ <div class="order-tracking-section">
+    <p class="info-data-tracking">Order Tracking ID: <?php echo $trackingId; ?></p>
+
+    <!-- Copy button -->
+    <button onclick="copyToClipboard('<?php echo $trackingId; ?>')">Copy</button>
+</div>
+
+<!-- Add a reminder line -->
+<p>Please don't forget to copy the above ID number!</p>
+
+<!-- JavaScript function to copy to clipboard -->
+<script>
+    function copyToClipboard(text) {
+        var input = document.createElement('textarea');
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+
+        // Provide a visual indication, you can customize this as needed
+        alert('Order Tracking ID copied to clipboard: ' + text);
+    }
+</script>
 	<div class="user-info">
 		<div class="info-section">
 			<h3>Contact Information</h3>
@@ -75,12 +106,17 @@
 		</div>
 		<div class="info-section">
 			<h3>Order Summary</h3>
-			<p class="info-data">Subtotal: $<?php echo number_format(calculateSubtotal(), 2);?></p>
-			<p class="info-data">Shipping: $0.00</p>
-			<p class="info-data">Tax: $<?php echo number_format(calculateTax(), 2); ?></p>
-			<p class="info-data">Total: $<?php echo number_format(calculateTotal(),2);?></p>
-			<p class="info-data">Items: <?php echo count($cartItems);?></p>
-		</div>
+			                <!-- Order Summary without item details -->
+                <p class="info-data">Subtotal: $<?php echo number_format(calculateSubtotal(), 2);?></p>
+                <p class="info-data">Shipping: $0.00</p>
+                <p class="info-data">Tax: $<?php echo number_format(calculateTax(), 2); ?></p>
+                <p class="info-data">Total: $<?php echo number_format(calculateTotal(), 2);?></p>
+
+
+<!-- Add the link to orderTracking.php -->
+<p class="info-data"><a href="orderTracking.php">Track Your Order</a></p>
+	    
+</div>
 	</div>
 </main>
 <footer>
