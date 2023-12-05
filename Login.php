@@ -13,12 +13,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login | VRAMS Shoe Store</title>
-        <link rel="stylesheet" href="css/stylesLogin.css">
+        <link rel="stylesheet" href="stylesLogin.css">
     </head>
     <body>
         <header>
             <div class="navbar" id="navbar">
-                <a href="mainVRAMS.php"><img src = "VRAMS Logo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
+                <a href="mainVRAMS.php"><img src = "VRAMSLogo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
                 <a href="shop.php">Shop</a>  
                 <a href="InventoryCheck.php">Inventory</a>
                 <a href="AboutUs.php">About Us</a>
