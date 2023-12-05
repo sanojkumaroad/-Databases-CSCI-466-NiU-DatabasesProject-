@@ -3,42 +3,72 @@
 // Include database connection
 include 'db.php';
 
-
 // Handle the AJAX request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Assuming you have a function to insert the product into the cart in the database
-    $productId = $_POST['productId'];
-    insertProductIntoCart($productId);
-    echo "Product added to the cart successfully!";
+    if (isset($_POST['productId'])) {
+        $productId = $_POST['productId'];
+        addToCart($productId);
+
+        // Redirect to cart.php after adding the product to the cart
+        header("Location: cart.php");
+        exit();
+    }
+}
+
+// Function to get product details by ID from the database
+function getProductById($product_id) {
+    global $pdo;
+
+    $query = $pdo->prepare("SELECT * FROM Products WHERE ProductID = ?");
+    $query->execute([$product_id]);
+
+    return $query->fetch(PDO::FETCH_ASSOC);
 }
 
 function insertProductIntoCart($productId) {
-    // Implement your logic to insert the product into the cart (e.g., insert into Order_Item table)
-    // Adjust the SQL query based on your database structure
-    $query = "INSERT INTO Order_Item (OrderID, ProductID, ItemQty, SUBTOTAL) VALUES (1, $productId, 1, 0.0)";
-    mysqli_query($connection, $query);
+    global $connection; // Add this line to access the global connection variable
+
+    // Assume you have a session variable for the current order ID
+    $orderId = $_SESSION['current_order_id']; // Make sure you set this value when creating a new order
+
+    // Check if the product is already in the cart
+    $queryCheck = "SELECT * FROM Order_Item WHERE OrderID = $orderId AND ProductID = $productId";
+    $resultCheck = mysqli_query($connection, $queryCheck);
+
+    if (mysqli_num_rows($resultCheck) > 0) {
+        // If the product is already in the cart, update the quantity
+        $queryUpdate = "UPDATE Order_Item SET ItemQty = ItemQty + 1 WHERE OrderID = $orderId AND ProductID = $productId";
+        mysqli_query($connection, $queryUpdate);
+    } else {
+        // If the product is not in the cart, insert a new record
+        $queryInsert = "INSERT INTO Order_Item (OrderID, ProductID, ItemQty, SUBTOTAL) VALUES ($orderId, $productId, 1, 0.0)";
+        mysqli_query($connection, $queryInsert);
+    }
 }
 
-
 // Function to add a product to the cart
-function addToCart($product_id) {
-    // Check if the product is already in the cart
+function addToCart($productId) {
+    // Implement your logic to add the product to the cart
+    // For example, update the session variable to store the cart items
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
 
-    // Increment the quantity if the product is already in the cart
-    if (isset($_SESSION['cart'][$product_id])) {
-        $_SESSION['cart'][$product_id]['quantity']++;
-    } else {
-        // Add the product to the cart with quantity 1
-        $product = getProductById($product_id);
+    // Assuming you have a getProductById function to fetch product details
+    $product = getProductById($productId);
 
-        if ($product) {
-            $_SESSION['cart'][$product_id] = [
-                'id' => $product['id'],
-                'name' => $product['name'],
-                'price' => $product['price'],
+    if ($product) {
+        // Check if the product is already in the cart
+        if (isset($_SESSION['cart'][$productId])) {
+            // Increment the quantity if the product is already in the cart
+            $_SESSION['cart'][$productId]['quantity']++;
+        } else {
+            // Add the product to the cart if it's not already in the cart
+            $_SESSION['cart'][$productId] = [
+                'id' => $productId,
+                'name' => $product['ProductName'],
+                'price' => $product['ProductPrice'],
                 'quantity' => 1,
             ];
         }
@@ -68,7 +98,6 @@ function getCartItems() {
     }
 }
 
-
 // Function to calculate the subtotal of items in the cart
 function calculateSubtotal() {
     $subtotal = 0;
@@ -82,7 +111,6 @@ function calculateSubtotal() {
 
     return $subtotal;
 }
-
 
 // Function to calculate the total with tax and shipping
 function calculateTotal() {
@@ -105,12 +133,3 @@ function calculateTax() {
     return $tax;
 }
 
-// Function to get product details by ID from the database
-function getProductById($product_id) {
-    global $pdo;
-
-    $query = $pdo->prepare("SELECT * FROM Products WHERE id = ?");
-    $query->execute([$product_id]);
-
-    return $query->fetch(PDO::FETCH_ASSOC);
-}
