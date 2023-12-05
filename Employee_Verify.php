@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Login | VRAMS Shoe Store</title>
-    <link rel="stylesheet" href="css/stylesEmployee_Verify.css">
+    <link rel="stylesheet" href="stylesEmployee_Verify.css">
 </head>
 
 <body>
