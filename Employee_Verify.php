@@ -11,7 +11,7 @@
 
     <header>
         <div class="navbar" id="navbar">
-            <a href="mainVRAMS.php"><img src="VRAMSLogo.png" alt="VRAMS logo" width="200" height="150"></a>
+            <a href="mainVRAMS.php"><img src="VRAMS Logo.png" alt="VRAMS logo" width="200" height="150"></a>
             <a href="shop.php">Shop</a>
             <a href="InventoryCheck.php">Inventory</a>
             <a href="AboutUs.php">About Us</a>
