@@ -7,29 +7,27 @@
 	</head>
 
 	<body>
-		<?php
-			include 'connection.php';
-            // $connection is available and connected to the database.
-            // Perform your database operations using $connection.
+		    <?php
+        include 'connection.php';
+        include 'checkout_functions.php';
 
-			include 'cart_functions.php';
-
-			$cartItems=getCartItems();
-		?>
-
-        <header>
-            <div class="navbar" id="navbar">
-                <a href="mainVRAMS.php"><img src = "VRAMSLogo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
-                <a href="shop.php">Shop</a>  
-                <a href="InventoryCheck.php">Employee</a>
-                <a href="AboutUs.php">About Us</a>
-                <a href="Contact.php">Contact</a>
-                <a href="Login.php">Login/Sign Up</a>
-                <a href="cart.php">Cart</a>
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
-            </div>
-        </header>
-
+        $cartItems = getCartItems();
+        $subtotal = calculateSubtotal();
+        $total = calculateTotal();
+    ?>
+            <header>
+        <div class="navbar" id="navbar">
+            <a href="mainVRAMS.php"><img src="VRAMSLogo.png" alt="VRAMS logo" width="200" height="150"></a>
+            <a href="product_list.php">Shop</a>
+            <a href="orderTracking.php">Track Order</a>
+            <a href="AboutUs.php">About Us</a>
+            <a href="Contact.php">Contact</a>
+            <a href="Login.php">Login/Sign Up</a>
+            <a href="InventoryCheck.php">Employee</a>
+            <a href="cart.php">Cart</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
+        </div>
+    </header>
 		<main>
 			<h1>Checkout (<?php echo count($cartItems);?> items)</h1>
 			<hr>
@@ -60,13 +58,23 @@
                 		<input type="text" placeholder="State" size="12"name="billingState" required/>
                 		<input type="numeric" placeholder="Zip Code" size="10" name="billingZip" maxlength="5" required/><br>
 
-				<h3>Order Summary</h3>
-				<p id="subtotal">Subtotal: $<?php echo number_format(calculateSubtotal(),2);?></p>
-				<p id="discount"></p>
-				<p id="shipping">Shipping & Handling: $0.00</p>
-				<p id="total">Total: $<?php echo number_format(calculateTotal(),2); ?></p>
 
-				<input type="submit" name="submit" value="Place Order" style="width:200px"><br>
+            <h3>Order Summary</h3>
+
+            <!-- Summary Section -->
+            <div class="summary-section">
+                <!-- Subtotal, Shipping, Tax, and Total -->
+                <div id="order-summary-html">
+                    <p>Subtotal: $<?php echo number_format($subtotal, 2); ?></p>
+                    <p>Estimated Shipping & Handling: $0.00</p>
+                    <p>Estimated Tax: $<?php echo number_format(calculateTax(), 2); ?></p>
+                    <p>Total: $<?php echo number_format($total, 2); ?></p>
+                </div>
+
+                <!-- Checkout Link -->
+                <input type="submit" name="submit" value="Place Order" style="width:200px"><br>
+            </div>
+
 			</form>
 		</main>
 
@@ -80,3 +88,4 @@
 		</footer>
 	</body>
 </html>
+
