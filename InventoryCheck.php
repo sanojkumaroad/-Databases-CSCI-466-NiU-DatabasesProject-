@@ -19,19 +19,19 @@
     </head>
     
     <body>
-        <header>
-            <div class="navbar" id="navbar">
-                <a href="mainVRAMS.php"><img src = "VRAMSLogo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
-                <a href="shop.php">Shop</a>  
-                <a href="InventoryCheck.php">Inventory</a>
-                <a href="AboutUs.php">About Us</a>
-                <a href="Contact.php">Contact</a>
-                <a href="Login.php">Login/Sign Up</a>
-                <a href="cart.php">Cart</a>
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
-            </div>
-        </header>
-
+            <header>
+        <div class="navbar" id="navbar">
+            <a href="mainVRAMS.php"><img src="VRAMSLogo.png" alt="VRAMS logo" width="200" height="150"></a>
+            <a href="shop.php">Shop</a>
+            <a href="orderTracking.php">Track Order</a>
+            <a href="AboutUs.php">About Us</a>
+            <a href="Contact.php">Contact</a>
+            <a href="Login.php">Login/Sign Up</a>
+            <a href="InventoryCheck.php">Employee</a>
+            <a href="cart.php">Cart</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
+        </div>
+    </header>
         <!--    Setting left to show list of all products      -->
         <div>
             <h1> Full Product List </h1>
@@ -102,7 +102,7 @@
             </form>
 
             
-        // PHP Code to add more to quantity of product selected
+        <!--  PHP Code to add more to quantity of product selected -->
 <?php
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["addsubmit"]))
     {
