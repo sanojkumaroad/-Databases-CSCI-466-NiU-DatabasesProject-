@@ -16,19 +16,19 @@
         <link rel="stylesheet" href="stylesLogin.css">
     </head>
     <body>
-        <header>
-            <div class="navbar" id="navbar">
-                <a href="mainVRAMS.php"><img src = "VRAMSLogo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
-                <a href="shop.php">Shop</a>  
-                <a href="InventoryCheck.php">Inventory</a>
-                <a href="AboutUs.php">About Us</a>
-                <a href="Contact.php">Contact</a>
-                <a href="Login.php">Login/Sign Up</a>
-                <a href="cart.php">Cart</a>
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
-            </div>
-        </header>
-
+            <header>
+        <div class="navbar" id="navbar">
+            <a href="mainVRAMS.php"><img src="VRAMSLogo.png" alt="VRAMS logo" width="200" height="150"></a>
+            <a href="shop.php">Shop</a>
+            <a href="orderTracking.php">Track Order</a>
+            <a href="AboutUs.php">About Us</a>
+            <a href="Contact.php">Contact</a>
+            <a href="Login.php">Login/Sign Up</a>
+            <a href="InventoryCheck.php">Employee</a>
+            <a href="cart.php">Cart</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
+        </div>
+    </header>
         <main>
             <h2>Login</h2>
 
