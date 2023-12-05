@@ -70,7 +70,7 @@ VALUES ('Soccer Pro Elite', 'Professional-grade soccer cleats for optimal perfor
 
 --11 Inserting Slip-on Comfort
 INSERT INTO Products(ProductName, ProductDescription, Qty, ProductPrice)
-VALUES ('Slip-on Comfort', 'Casual slip-on shoes with memory foam insoles for comfort', 70, 55.00);
+VALUES ('Slip-on Comfort', 'Casual slip-on shoes with memory foam insoles for comfort', 0, 55.00);
 
 --12 Inserting Snow Explorer Boots
 INSERT INTO Products(ProductName, ProductDescription, Qty, ProductPrice)
