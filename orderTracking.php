@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VRAMS Shoe Order Tracking</title>
-    <link rel="stylesheet" href="css/stylesOrderTracking.css">
+    <link rel="stylesheet" href="stylesOrderTracking.css">
 </head>
 <body>
+
+   <header>
+        <div class="navbar" id="navbar">
+            <a href="mainVRAMS.php"><img src="VRAMSLogo.png" alt="VRAMS logo" width="200" height="150"></a>
+            <a href="shop.php">Shop</a>
+            <a href="orderTracking.php">Track Order</a>
+            <a href="AboutUs.php">About Us</a>
+            <a href="Contact.php">Contact</a>
+            <a href="Login.php">Login/Sign Up</a>
+            <a href="InventoryCheck.php">Employee</a>
+            <a href="cart.php">Cart</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
+        </div>
+    </header>
 
     <h2>Order Tracking for Customer</h2>
 
@@ -53,5 +67,13 @@
         <button type="submit" name="submit">Track Order</button>
     </form>
 
+    <footer>
+        <div class="contact-us">
+            <h2>Contact Us</h2>
+            <p>Email: info@vramsshoestore.com</p>
+            <p>Phone: (555) 123-4567</p>
+        </div>
+        <p>All rights reserved. © 2023 VRAMS Shoe Store</p>
+    </footer>
 </body>
 </html>
