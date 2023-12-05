@@ -4,18 +4,18 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Contact Us | VRAMS Shoe Store</title>
-        <link rel="stylesheet" href="css/stylesContact.css">
+        <link rel="stylesheet" href="stylesContact.css">
     </head>
 
     <body>
         <header>
             <div class="navbar" id="navbar">
-      	        <a href="mainVRAMS.php"><img src = "VRAMS Logo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
+      	        <a href="mainVRAMS.php"><img src = "VRAMSLogo.png" alt = "VRAMS logo" width = "200" height = "150"></a>
                 <a href="shop.php">Shop</a>  
-	            <a href="InventoryCheck.php">Inventory</a>
+	        <a href="InventoryCheck.php">Employee</a>
                 <a href="AboutUs.php">About Us</a>
-                <a href="Contact.php">Contact</a>
-                <a href="cart.php">Cart</a>
+        	<a href="Login.php">Login/Sign Up</a>
+		<a href="cart.php">Cart</a>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
             </div>
         </header>
