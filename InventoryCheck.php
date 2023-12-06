@@ -50,7 +50,6 @@ if(!$queryID) {
             </tr>
 
             <?php while($row = mysqli_fetch_array($queryP, MYSQLI_ASSOC)) { ?>
-
                 <tr>
                     <td>
                         <?php echo $row['ProductID']; ?>
@@ -59,7 +58,6 @@ if(!$queryID) {
                         <?php echo $row['ProductName']; ?>
                     </td>
                 </tr>
-
             <?php } ?>
         </table>
     </div>
@@ -202,17 +200,84 @@ if(!$queryID) {
                   <th>Order Date</th><th>Order Total</th><th>Order Status</th></tr>";
             foreach($results as $row) {
                 echo "<tr>";
-                    echo "<td>".$row['TrackingID']."</td>";
-                    echo "<td>".$row['OrderID']."</td>";
-                    echo "<td>".$row['CustomerID']."</td>";
-                    echo "<td>".$row['OrderDate']."</td>";
-                    echo "<td>$".$row['OrderTotal']."</td>";
-                    echo "<td>$".$row['TrackingStatus']."</td>";
+                echo "<td>".$row['TrackingID']."</td>";
+                echo "<td>".$row['OrderID']."</td>";
+                echo "<td>".$row['CustomerID']."</td>";
+                echo "<td>".$row['OrderDate']."</td>";
+                echo "<td>$".$row['OrderTotal']."</td>";
+                echo "<td>$".$row['TrackingStatus']."</td>";
                 echo "</tr>";
             }
             echo "</table>";
         } else {
             echo "<p>No outstanding orders with 'Processing' status.</p>";
+        }
+
+        // Close the database connection
+        $pdo = null;
+        ?>
+    </div>
+
+    <div>
+        <h2>Order Fulfillment</h2>
+
+        <?php
+        // Include the database connection
+        include 'db.php';
+
+        // Check if the form is submitted
+        if(isset($_POST['update'])) {
+            // Get the values from the form
+            $orderId = $_POST['order_id'];
+            $orderStatus = $_POST['order_status'];
+
+            // Update the records in the database
+            $updateStmt = $pdo->prepare("
+                UPDATE Order_Tracking
+                SET TrackingStatus = :tracking_status
+                WHERE OrderID = :order_id
+            ");
+
+            $updateStmt->bindParam(':tracking_status', $orderStatus);
+            $updateStmt->bindParam(':order_id', $orderId);
+            $updateStmt->execute();
+        }
+
+        // Fetch orders from the database
+        $stmt = $pdo->prepare("
+            SELECT *
+            FROM Order_Info
+            LEFT JOIN Order_Tracking ON Order_Info.OrderID = Order_Tracking.OrderID
+        ");
+
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Display orders in a table
+        if($results) {
+            echo "<table border='2'>";
+            echo "<tr><th>Order ID</th><th>Customer ID</th><th>Order Date</th><th>Order Total</th><th>Tracking ID</th><th>Order Status</th><th>Action</th></tr>";
+            foreach($results as $row) {
+                echo "<tr>";
+                echo "<td>".$row['OrderID']."</td>";
+                echo "<td>".$row['CustomerID']."</td>";
+                echo "<td>".$row['OrderDate']."</td>";
+                echo "<td>".$row['OrderTotal']."</td>";
+                echo "<td>".$row['TrackingID']."</td>";
+                echo "<td>".$row['TrackingStatus']."</td>";
+                echo "<td>";
+                echo "<form method='post' action='InventoryCheck.php'>";
+                echo "<input type='hidden' name='order_id' value='".$row['OrderID']."'>";
+                echo "<label for='order_status'>Change Status Here:</label>";
+                echo "<input type='text' name='order_status' required>";
+                echo "<button type='submit' name='update'>Update</button>";
+                echo "</form>";
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "<p>No orders found.</p>";
         }
 
         // Close the database connection
