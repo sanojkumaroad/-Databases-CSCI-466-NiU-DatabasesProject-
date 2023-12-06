@@ -15,7 +15,7 @@ CREATE TABLE Promo_Code(PromoCodeID INT AUTO_INCREMENT PRIMARY KEY, DiscountPerc
 
 --> Creating 1-1 Relationship Tables
 CREATE TABLE Order_Tracking(TrackingID VARCHAR(20) PRIMARY KEY, OrderID INT, TrackingStatus VARCHAR(50), FOREIGN KEY (OrderID) REFERENCES Order_Info(OrderID));
-CREATE TABLE Customer_Billing(OrderID INT PRIMARY KEY, CustomerID INT, CardName VARCHAR(50), CardNumber VARCHAR(15) NOT NULL, CardExpiration VARCHAR(5), CVV VARCHAR(5), BillingAddress VARCHAR(300), FOREIGN KEY(CustomerID) REFERENCES User_Customer(CustomerID), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID));
+CREATE TABLE Customer_Billing(OrderID INT PRIMARY KEY, CustomerID INT, CardName VARCHAR(50), CardNumber VARCHAR(20) NOT NULL, CardExpiration VARCHAR(5), CVV VARCHAR(5), BillingAddress VARCHAR(300), FOREIGN KEY(CustomerID) REFERENCES User_Customer(CustomerID), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID));
 CREATE TABLE Order_Discount(OrderID INT, PromoCodeID INT, PRIMARY KEY (OrderID, PromoCodeID), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID), FOREIGN KEY(PromoCodeID) REFERENCES Promo_Code(PromoCodeID));
 
 --> Inserting 5 Customers
@@ -111,5 +111,4 @@ VALUES ('All-Terrain Sandals', 'Sandals with grippy soles for all-terrain use', 
 
 --> Inserting an employee
 INSERT INTO User_Employee(Address, Password, Email, PhoneNumber, FirstName, LastName)
-VALUES ('6753 S Monroe St. Plano, IL 68504', 'TrippyToes1!', 'trippy@outlook.com', '3123422159', 'Bob', 'Burgers');
-
+VALUES ('6753 S Monroe St. Plano, IL 68504', 'TrippyToes1!', 'trippy@outlook.com', '3123422159', 'Bob', 'Burgers'); 
