@@ -158,22 +158,56 @@ if(!$queryID) {
 
         <!-- Table that links each product to its product details page -->
         <h4> Click link to view product details </h4>
-        <table border="2" style="background-color: white;">
-            <tr>
-                <th> Product ID Number </th>
-                <th> Select </th>
-            </tr>
-            <?php while($row = mysqli_fetch_array($queryID, MYSQLI_ASSOC)) { ?>
+          <table border="1">
                 <tr>
-                    <td>
-                        <?php echo $row['ProductID']; ?>
-                    </td>
-                    <td> <a
-                            href="https://i.seadn.io/gae/2hDpuTi-0AMKvoZJGd-yKWvK4tKdQr_kLIpB_qSeMau2TNGCNidAosMEvrEXFO9G6tmlFlPQplpwiqirgrIPWnCKMvElaYgI-HiVvXc?auto=format&dpr=1&w=3840">
-                            Click me</a> </td>
+                    <th> Product ID <br> Number </th>
+                    <th> Name </th>
+                    <th> Select </th>
                 </tr>
-            <?php } ?>
-        </table>
+                <?php
+                // function to fetch product details from the database
+                $queryP = mysqli_query($connection, "SELECT ProductID, ProductName, ProductPrice FROM Products");
+
+                while ($row = mysqli_fetch_array($queryP, MYSQLI_ASSOC)) {
+                    ?>
+                    <tr>
+                        <td> <?php echo $row['ProductID']; ?> </td>
+                        <td> <?php echo $row['ProductName']; ?> </td>
+                        <td class="product-container">
+                            <?php
+                            // links for products
+                            $productLinks = [
+                                "sneakers.php",
+                                "running.php",
+                                "loafers.php",
+                                "hiking.php",
+                                "basketball.php",
+                                "yoga.php",
+                                "urbanboots.php",
+                                "techrunner.php",
+                                "balletflats.php",
+                                "soccerpro.php",
+                                "slipons.php",
+                                "snowboots.php",
+                                "fashionheels.php",
+                                "summersandals.php",
+                                "crossfit.php",
+                                "canvasslipons.php",
+                                "skateboardpro.php",
+                                "explorer.php",
+                                "oxfords.php",
+                                "terrainsandals.php"
+                            ];
+                            $productIndex = $row['ProductID'] - 1;
+                            $productLink = $productLinks[$productIndex];
+                            ?>
+                            <a href="<?php echo $productLink; ?>"> Click me</a>
+                            
+                        </td>
+                    </tr>
+                <?php
+                } ?>
+            </table>     
     </div>
     <div>
         <h2>Outstanding Orders</h2>
