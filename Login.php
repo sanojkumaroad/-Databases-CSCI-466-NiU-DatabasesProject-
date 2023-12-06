@@ -31,26 +31,49 @@
     </header>
         <main>
             <h2>Login</h2>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+            <label for="login_email">Email:</label>
+            <input type="email" id="login_email" name="login_email" required>
+            <br>
+            <label for="login_password">Password:</label>
+            <input type="password" id="login_password" name="login_password" required>
+            <br>
+            <button type="submit" name="login">Login</button>
+        </form>
 
             <?php
-                if (isset($loginError)) {
-                    echo '<p style="color: red;">' . $loginError . '</p>';
-                }  elseif (isset($_SESSION['user_logged_in'])) {
-                    echo '<p style="color: green;">You have successfully logged in as ' . $_SESSION['user_email'] . '.</p>';
-                    // Redirect to home page
-                    header('refresh:3; url=mainVRAMS.php'); // Redirect after 3 seconds
-                    exit();
-                }
-            ?>
+            include "connection.php";
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            <form method="post" action="login.php" onsubmit="return validateForm('login')">
-                <label for="login-email">Email:</label>
-                <input type="email" id="login-email" name="email" required> <br>
-                <label for="login-password">Password:</label>
-                <input type="password" id="login-password" name="password" required> <br>
-                <button type="submit" name="login">Login</button>
-            </form>
+            // Get user input
+            $email = isset($_POST['login_email']) ? $_POST['login_email'] : '';
+            $password = isset($_POST['login_password']) ? $_POST['login_password'] : '';
 
+            // Query to check if the email and password match
+            $sql = "SELECT * FROM User_Customer WHERE email='$email' AND password='$password'";
+
+            // Execute the query and check for errors
+            $result = $connection->query($sql);
+            if (!$result) {
+                die("Error in SQL query: " . $connection->error);
+            }
+
+            // Check if there is a matching user
+            $num_rows = $result->num_rows;
+
+            if ($num_rows > 0) {
+                // Redirect to another page on successful login
+                header("Location: mainVRAMS.php");
+                exit();
+            } else {
+                // Login Failed!
+                echo '<p style="color: red;">' . "Invalid Email or Password. Please Try Again!" . '</p>';
+            }
+          $connection->close();
+        } ?>
+
+
+         
             <h2>Create Account</h2>
 
             <?php
