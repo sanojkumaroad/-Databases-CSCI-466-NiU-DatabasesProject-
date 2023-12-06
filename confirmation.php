@@ -14,8 +14,6 @@
         	$subtotal = calculateSubtotal();
 		$total = calculateTotal();
 
-		// Generate a unique tracking ID
-		$trackingId = generateTrackingId();
 ?>
     <header>
         <div class="navbar" id="navbar">
@@ -69,10 +67,10 @@
 	<hr>
 	<h2 class="info-header">Order Confirmation</h2>
  <div class="order-tracking-section">
-    <p class="info-data-tracking">Order Tracking ID: <?php echo $trackingId; ?></p>
+    <p class="info-data-tracking">Order Tracking ID: <?php echo $_POST['trackingId']; ?></p>
 
     <!-- Copy button -->
-    <button onclick="copyToClipboard('<?php echo $trackingId; ?>')">Copy</button>
+    <button onclick="copyToClipboard('<?php echo $_POST['trackingId]; ?>')">Copy</button>
 </div>
 
 <!-- Add a reminder line -->
