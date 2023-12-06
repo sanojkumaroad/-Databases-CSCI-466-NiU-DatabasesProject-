@@ -78,7 +78,7 @@
 <!-- Add a reminder line -->
 <p>Please don't forget to copy the above ID number!</p>
 
-<!-- JavaScript function to copy to clipboard -->
+<!-- function to copy to clipboard -->
 <script>
     function copyToClipboard(text) {
         var input = document.createElement('textarea');
@@ -88,7 +88,7 @@
         document.execCommand('copy');
         document.body.removeChild(input);
 
-        // Provide a visual indication, you can customize this as needed
+        // Provide a visual indication
         alert('Order Tracking ID copied to clipboard: ' + text);
     }
 </script>
@@ -113,7 +113,7 @@
                 <p class="info-data">Total: $<?php echo number_format(calculateTotal(), 2);?></p>
 
 
-<!-- Add the link to orderTracking.php -->
+<!-- link to orderTracking.php -->
 <p class="info-data"><a href="orderTracking.php">Track Your Order</a></p>
 	    
 </div>
