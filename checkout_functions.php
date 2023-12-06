@@ -4,17 +4,12 @@ session_start(); // Add this line
 // Include database connection
 include 'db.php';
 
-// Handle the AJAX request
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Assuming you have a function to insert the product into the cart in the database
-    if (isset($_POST['productId'])) {
-        $productId = $_POST['productId'];
-        addToCart($productId);
+// Function to generate a unique tracking ID
+function generateTrackingId() {
+    // Use the current timestamp and a random number for uniqueness
+    $trackingId = date("YmdHis") . mt_rand(100000, 999999);
 
-        // Redirect to cart.php after adding the product to the cart
-        header("Location: cart.php");
-        exit();
-    }
+    return $trackingId;
 }
 
 // Function to get product details by ID from the database
@@ -38,7 +33,7 @@ function addToCart($productId) {
     $queryCheck = "SELECT * FROM Order_Item WHERE OrderID = $orderId AND ProductID = $productId";
     $resultCheck = mysqli_query($connection, $queryCheck);
 
-    if (mysqli_num_rows($resultCheck) > 0) {
+    if(mysqli_num_rows($resultCheck) > 0) {
         // If the product is already in the cart, update the quantity
         $queryUpdate = "UPDATE Order_Item SET ItemQty = ItemQty + 1 WHERE OrderID = $orderId AND ProductID = $productId";
         mysqli_query($connection, $queryUpdate);
@@ -51,9 +46,9 @@ function addToCart($productId) {
     // Assuming you have a getProductById function to fetch product details
     $product = getProductById($productId);
 
-    if ($product) {
+    if($product) {
         // Check if the product is already in the cart
-        if (isset($_SESSION['cart'][$productId])) {
+        if(isset($_SESSION['cart'][$productId])) {
             // Increment the quantity if the product is already in the cart
             $_SESSION['cart'][$productId]['quantity']++;
         } else {
@@ -71,12 +66,12 @@ function addToCart($productId) {
 // Function to remove a product from the cart
 function removeItem($remove_id) {
     // Check if the product is in the cart
-    if (isset($_SESSION['cart'][$remove_id])) {
+    if(isset($_SESSION['cart'][$remove_id])) {
         // Decrement the quantity
         $_SESSION['cart'][$remove_id]['quantity']--;
 
         // Remove the product if the quantity becomes 0
-        if ($_SESSION['cart'][$remove_id]['quantity'] == 0) {
+        if($_SESSION['cart'][$remove_id]['quantity'] == 0) {
             unset($_SESSION['cart'][$remove_id]);
         }
     }
@@ -84,7 +79,7 @@ function removeItem($remove_id) {
 
 // Function to get cart items
 function getCartItems() {
-    if (isset($_SESSION['cart'])) {
+    if(isset($_SESSION['cart'])) {
         return $_SESSION['cart'];
     } else {
         return [];
@@ -96,8 +91,8 @@ function calculateSubtotal() {
     $subtotal = 0;
 
     // Check if the cart is set and not empty
-    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-        foreach ($_SESSION['cart'] as $item) {
+    if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+        foreach($_SESSION['cart'] as $item) {
             $subtotal += $item['price'] * $item['quantity'];
         }
     }
@@ -119,11 +114,10 @@ function calculateTotal() {
 // Function to calculate the tax based on the subtotal
 function calculateTax() {
     $taxRate = 0.0495; // 4.95%
-    
+
     // Calculate tax based on the subtotal
     $tax = calculateSubtotal() * $taxRate;
 
     return $tax;
 }
 ?>
-
