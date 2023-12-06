@@ -2,11 +2,18 @@
 
 <?php
     include 'connection.php';
-    // $connection is available and connected to the database.
-    // Perform your database operations using $connection.
 
-    $queryP = mysqli_query($connection, "select ProductID, ProductName, ProductPrice from Products");
-    $queryID = mysqli_query($connection, "select ProductID from Products");
+    // Fetch products with error handling
+    $queryP = mysqli_query($connection, "SELECT ProductID, ProductName, ProductPrice FROM Products");
+    if (!$queryP) {
+        die("Error in query: " . mysqli_error($connection));
+    }
+
+    // Fetch product IDs with error handling
+    $queryID = mysqli_query($connection, "SELECT ProductID FROM Products");
+    if (!$queryID) {
+        die("Error in query: " . mysqli_error($connection));
+    }
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +78,11 @@
                 // PHP code to run if the above form is submitted
                 if(isset($_GET["inventorysubmit"]) && $_GET["check_inventory"] != "NULL") {
                     $comparison = $_GET["check_inventory"];
-                    $queryINV = mysqli_query($connection, "Select ProductID, ProductName, Qty from Products WHERE quantity $comparison 0;");
+                    $queryINV = mysqli_query($connection, "SELECT ProductID, ProductName, Qty FROM Products WHERE Qty $comparison 0");
+                    if (!$queryINV) {
+                        die("Error in query INV: " . mysqli_error($connection));
+                    }
+            
             ?>
 
             <table border="2" style="background-color: white;">
