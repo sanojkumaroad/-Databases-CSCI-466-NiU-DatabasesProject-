@@ -1,6 +1,16 @@
 <!-- VRAMS Inventory Check for Employee -->
 
 <?php
+    // Start the session
+//    session_start();
+
+    // Check if the user is not logged in as an employee
+ //   if (!isset($_SESSION['employee_logged_in'])) {
+        // Redirect to Employee_Verify.php if not logged in
+   //     header("Location: Employee_Verify.php");
+     //   exit();
+  //  }
+
     include 'connection.php';
 
     // Fetch products with error handling
