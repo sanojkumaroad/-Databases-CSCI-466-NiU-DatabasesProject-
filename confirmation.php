@@ -161,25 +161,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$thankYou = "Thank you for your order!";
 		}
 
-		// if (isset($_POST['email']) && isset($_POST['number']) && isset($_POST['fname']) && isset($_POST['address']) && isset($_POST['lname']) && isset($_POST['city']) && isset($_POST['state'])) {
-		// 	$email = $_POST['email'];
-		// 	$number = $_POST['number'];
-		// 	$fname = $_POST['fname'];
-		// 	$lname = $_POST['lname'];
-		// 	$address = $_POST['address'];
-		// 	$city = $_POST['city'];
-		// 	$state = $_POST['state'];
-		// 	$zip = $_POST['zip'];
-		// } else {
-		// 	$email = "Email: -";
-		// 	$number = "Phone number: -";
-		// 	$fname = "First name: - <br><br>";
-		// 	$lname = "Last name: -";
-		// 	$address = "Address: -";
-		// 	$city = "City: -<br><br>";
-		// 	$state = "State: -<br><br>";
-		// 	$zip = "Zip: -";
-		// }
+		if (isset($_POST['email']) && isset($_POST['number']) && isset($_POST['fname']) && isset($_POST['address']) && isset($_POST['lname']) && isset($_POST['city']) && isset($_POST['state'])) {
+			$email = $_POST['email'];
+			$number = $_POST['number'];
+			$fName = $_POST['fname'];
+			$lName = $_POST['lname'];
+			$address = $_POST['address'];
+			$city = $_POST['city'];
+			$state = $_POST['state'];
+			$zip = $_POST['zip'];
+		} else {
+			$email = "Email: -";
+			$number = "Phone number: -";
+			$fName = "First name: - <br><br>";
+			$lName = "Last name: -";
+			$address = "Address: -";
+			$city = "City: -<br><br>";
+			$state = "State: -<br><br>";
+			$zip = "Zip: -";
+		}
 		?>
 		<h1>
 			<?php echo $thankYou; ?>
