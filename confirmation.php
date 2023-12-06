@@ -78,12 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$orderId = $row['OrderID'];
 	}
 
-	// $orderId = -1;
-	// if ($result->num_rows > 0) {
-	// 	$row = $result->fetch_assoc();
-	// 	$orderId = $row['OrderID'];
-	// }
-
 	if ($orderId == -1) {
 		die("Error: OrderId is not set correctly.");
 	}
@@ -93,7 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// Finsih OrderItem Later
 
 	/* Inserting Data into Order_Tracking Table */
-
 	// Prepares query for execution
 	$sql = "INSERT INTO Order_Tracking(TrackingID, OrderID, TrackingStatus)
 				VALUES ('$trackingId', '$orderId', 'Processing');";
@@ -133,8 +126,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// Loads Confirmation Page after the data insertion into the database
 	header("Location: confirmation.php?id=$trackingId");
 	exit();
-} else {
-	echo "Not Inserting data";
 }
 ?>
 
@@ -170,25 +161,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$thankYou = "Thank you for your order!";
 		}
 
-		if (isset($_POST['email']) && isset($_POST['number']) && isset($_POST['fname']) && isset($_POST['address']) && isset($_POST['lname']) && isset($_POST['city']) && isset($_POST['state'])) {
-			$email = $_POST['email'];
-			$number = $_POST['number'];
-			$fname = $_POST['fname'];
-			$lname = $_POST['lname'];
-			$address = $_POST['address'];
-			$city = $_POST['city'];
-			$state = $_POST['state'];
-			$zip = $_POST['zip'];
-		} else {
-			$email = "Email: -";
-			$number = "Phone number: -";
-			$fname = "First name: - <br><br>";
-			$lname = "Last name: -";
-			$address = "Address: -";
-			$city = "City: -<br><br>";
-			$state = "State: -<br><br>";
-			$zip = "Zip: -";
-		}
+		// if (isset($_POST['email']) && isset($_POST['number']) && isset($_POST['fname']) && isset($_POST['address']) && isset($_POST['lname']) && isset($_POST['city']) && isset($_POST['state'])) {
+		// 	$email = $_POST['email'];
+		// 	$number = $_POST['number'];
+		// 	$fname = $_POST['fname'];
+		// 	$lname = $_POST['lname'];
+		// 	$address = $_POST['address'];
+		// 	$city = $_POST['city'];
+		// 	$state = $_POST['state'];
+		// 	$zip = $_POST['zip'];
+		// } else {
+		// 	$email = "Email: -";
+		// 	$number = "Phone number: -";
+		// 	$fname = "First name: - <br><br>";
+		// 	$lname = "Last name: -";
+		// 	$address = "Address: -";
+		// 	$city = "City: -<br><br>";
+		// 	$state = "State: -<br><br>";
+		// 	$zip = "Zip: -";
+		// }
 		?>
 		<h1>
 			<?php echo $thankYou; ?>
@@ -234,11 +225,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			<div class="info-section">
 				<h3>Delivery Information</h3>
 				<p class="info-data">
-					<?php echo $fname; ?>
-					<?php echo $lname; ?>
+					<?php echo $fName; ?>
+					<?php echo $lName; ?>
 				</p>
 				<p class="info-data">
-					<?php echo $address; ?>
+					<?php echo $completeAddress; ?>
 				</p>
 				<p class="info-data">
 					<?php echo $city; ?>,
