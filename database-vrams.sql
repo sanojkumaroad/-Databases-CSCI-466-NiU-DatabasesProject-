@@ -14,8 +14,8 @@ CREATE TABLE Order_Item(OrderItemID INT AUTO_INCREMENT PRIMARY KEY, OrderID INT,
 CREATE TABLE Promo_Code(PromoCodeID INT AUTO_INCREMENT PRIMARY KEY, DiscountPercent INT, ExpiryDate VARCHAR(10));
 
 --> Creating 1-1 Relationship Tables
-CREATE TABLE Order_Tracking(TrackingID VARCHAR(11) PRIMARY KEY, OrderID INT, TrackingStatus VARCHAR(50), FOREIGN KEY (OrderID) REFERENCES Order_Info(OrderID));
-CREATE TABLE Customer_Billing(OrderID INT PRIMARY KEY, CustomerID INT, CardName VARCHAR(50), CardNumber INT NOT NULL, CardExpiration VARCHAR(5), CVV VARCHAR(5), BillingAddress VARCHAR(300), FOREIGN KEY(CustomerID) REFERENCES User_Customer(CustomerID), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID));
+CREATE TABLE Order_Tracking(TrackingID VARCHAR(20) PRIMARY KEY, OrderID INT, TrackingStatus VARCHAR(50), FOREIGN KEY (OrderID) REFERENCES Order_Info(OrderID));
+CREATE TABLE Customer_Billing(OrderID INT PRIMARY KEY, CustomerID INT, CardName VARCHAR(50), CardNumber VARCHAR(15) NOT NULL, CardExpiration VARCHAR(5), CVV VARCHAR(5), BillingAddress VARCHAR(300), FOREIGN KEY(CustomerID) REFERENCES User_Customer(CustomerID), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID));
 CREATE TABLE Order_Discount(OrderID INT, PromoCodeID INT, PRIMARY KEY (OrderID, PromoCodeID), FOREIGN KEY(OrderID) REFERENCES Order_Info(OrderID), FOREIGN KEY(PromoCodeID) REFERENCES Promo_Code(PromoCodeID));
 
 --> Inserting 5 Customers
