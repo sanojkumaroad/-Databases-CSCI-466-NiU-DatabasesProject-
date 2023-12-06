@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VRAMS Shoe Order Tracking</title>
-    <link rel="stylesheet" href="stylesOrderTracking.css">
+    <link rel="stylesheet" href="css/stylesOrderTracking.css">
 </head>
+
 <body>
 
-   <header>
+    <header>
         <div class="navbar" id="navbar">
             <a href="mainVRAMS.php"><img src="VRAMSLogo.png" alt="VRAMS logo" width="200" height="150"></a>
             <a href="shop.php">Shop</a>
@@ -23,40 +25,43 @@
     </header>
 
     <h2>Order Tracking for Customer</h2>
-
     <?php
-        include 'connection.php';
-        // $connection is available and connected to the database.
-        // Perform your database operations using $connection.
+    // Check if the form is submitted
+    if(isset($_POST['submit'])) {
+        // Retrieve the tracking ID from the form
+        $trackingID = $_POST['tracking_id'];
 
-        // Check if the form is submitted
-        if (isset($_POST['submit'])) {
-            // Get the tracking ID from the form
-            $trackingID = $_POST['tracking_id'];
+        // Database connection (assuming you have a connection.php file)
+        include 'db.php';
 
-            // Prepare and execute the SQL query
-            $stmt = $connection->prepare("
-                SELECT Order_Tracking.TrackingID, Order_Tracking.TrackingStatus, Orders.OrderID, Orders.OrderDate, Orders.OrderTotal, Orders.OrderStatus
-                FROM Order_Tracking
-                JOIN Orders ON Order_Tracking.OrderID = Orders.OrderID
-                WHERE Order_Tracking.TrackingID = :tracking_id
-            ");
-            $stmt->bindParam(':tracking_id', $trackingID);
-            $stmt->execute();
+        // Prepare and execute the SQL query
+        $stmt = $pdo->prepare("
+            SELECT *
+            FROM Order_Tracking
+            JOIN Order_Info ON Order_Tracking.OrderID = Order_Info.OrderID
+            WHERE Order_Tracking.TrackingID = :tracking_id
+        ");
+        $stmt->bindParam(':tracking_id', $trackingID);
+        $stmt->execute();
 
-            // Fetch the result
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Fetch the result
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Check if the tracking ID is found
-            if ($result) {
-                echo "<p>Order Status: " . $result['OrderStatus'] . "</p>";
-                echo "<p>Tracking Status: " . $result['TrackingStatus'] . "</p>";
-                echo "<p>Order Date: " . $result['OrderDate'] . "</p>";
-                echo "<p>Order Total: $" . $result['OrderTotal'] . "</p>";
-            } else {
-                echo "<p>Invalid tracking ID. Please check your tracking ID and try again.</p>";
-            }
+        // Check if the tracking ID is found
+        if($result) {
+            echo "<b><p style ='color: red'>Tracking Number: ".$result['TrackingID']."</p></b>";
+            echo "<b><p style ='color: red'>Order Status: ".$result['TrackingStatus']."</p></b>";
+            echo "<b><p style ='color: red'>Order ID: ".$result['OrderID']."</p></b>";
+            echo "<b><p style ='color: red'>Order Total: $".$result['OrderTotal']."</p></b>";
+            echo "<b><p style ='color: red'>Order Date: ".$result['OrderDate']."</p></b>";
+
+        } else {
+            echo "<p>Invalid tracking ID. Please check your tracking ID and try again.</p>";
         }
+
+        // Close the database connection
+        $pdo = null;
+    }
     ?>
 
     <!-- Tracking ID input form -->
@@ -76,4 +81,5 @@
         <p>All rights reserved. © 2023 VRAMS Shoe Store</p>
     </footer>
 </body>
+
 </html>
