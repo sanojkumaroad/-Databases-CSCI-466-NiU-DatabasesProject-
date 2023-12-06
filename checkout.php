@@ -1,3 +1,8 @@
+<?php
+include 'connection.php';
+include 'checkout_functions.php';
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -8,152 +13,6 @@
 </head>
 
 <body>
-	<?php
-	include 'connection.php';
-	include 'checkout_functions.php';
-
-	$cartItems = getCartItems();
-	$subtotal = calculateSubtotal();
-	$total = calculateTotal();
-	$trackingId = generateTrackingId();
-
-	// Handle the AJAX request
-	// Check if the form is submitted
-	if($_SERVER["REQUEST_METHOD"] == "POST") {
-
-		// Get user input values
-		$email = isset($_POST['email']) ? $_POST['email'] : '';
-		$number = isset($_POST['number']) ? $_POST['number'] : '';
-		$fName = isset($_POST['fname']) ? $_POST['fname'] : '';
-		$lName = isset($_POST['lname']) ? $_POST['lname'] : '';
-
-		$street = isset($_POST['address']) ? $_POST['address'] : '';
-		$city = isset($_POST['city']) ? $_POST['city'] : '';
-		$state = isset($_POST['state']) ? $_POST['state'] : '';
-		$zip = isset($_POST['zip']) ? $_POST['zip'] : '';
-		$completeAddress = $street.', '.$city.', '.$state.', '.$zip;
-
-		/* Inserting Data into User_Customer Table */
-		// Preparing Query
-		$sql = "INSERT INTO User_Customer(Address, Password, Email, PhoneNumber, FirstName, LastName) 
-				VALUES ('$completeAddress', 'null', '$email', '$number', '$fName', '$lName');";
-
-		// Executes the Query and Checks for Errors
-		$result = $connection->query($sql);
-		if(!$result) {
-			die("Error in SQL query: Inserting in User_Customer table failed");
-		}
-
-		/* Getting Customer ID */
-		// Preparing Query
-		$sql = "SELECT * FROM User_Customer WHERE Email = '$email' ";
-		// Executes the Query and Checks for Errors
-		$result = $connection->query($sql);
-		if(!$result) {
-			die("Error in SQL query: Getting Customer ID failed");
-		}
-
-		$customerId = -1;
-		$row = $result->fetch_assoc();
-		if($row["CustomerID"] > 0) {
-			$customerId = $row['CustomerID'];
-		}
-
-		// $customerId = -1;
-		// if ($result->num_rows > 0) {
-		// 	$row = $result->fetch_assoc();
-		// 	$customerId = $row['CustomerID'];
-		// }
-	
-		/* Getting Order Date and Time */
-
-		// Current date and time
-		$currentTime = new DateTime();
-		$orderDate = $currentTime->format("M d, Y \a\t h:i A");
-		$orderTotal = $total;
-
-		/* Inserting Data into Order_Info Table */
-		// Prepares the Query for Order_Info
-		$sql = "INSERT INTO Order_Info(CustomerID, OrderDate, OrderTotal)
-				VALUES ($customerId, '$orderDate', $orderTotal);";
-
-		// Executes the query and checks for errors
-		$result = $connection->query($sql);
-		if(!$result) {
-			die("Error in SQL query: Order_Info data insertion failed");
-		}
-
-		/* Gets Order Id */
-		// Prepares the Query for execution
-		$sql = "SELECT * FROM Order_Info WHERE CustomerID = '$customerId' AND OrderDate = '$orderDate';";
-
-		// Executes the query and checks for errors
-		$result = $connection->query($sql);
-		$orderId = -1;
-		if(($row = $result->fetch_assoc()) > 0) {
-			// die("Error in SQL query: " . $connection->error);
-			$orderId = $row['OrderID'];
-		}
-
-		// $orderId = -1;
-		// if ($result->num_rows > 0) {
-		// 	$row = $result->fetch_assoc();
-		// 	$orderId = $row['OrderID'];
-		// }
-	
-		if($orderId == -1) {
-			die("Error: OrderId is not set correctly.");
-		}
-
-		// Order_Item
-		//Order_Item Order_Item(OrderItemID auto, OrderID, ProductID, ItemQty, SUBTOTAL FLOAT);
-		// Finsih OrderItem Later
-	
-		/* Inserting Data into Order_Tracking Table */
-		// Generate a unique tracking ID
-		$trackingId = generateTrackingId();
-
-		// Prepares query for execution
-		$sql = "INSERT INTO Order_Tracking(TrackingID, OrderID, TrackingStatus)
-				VALUES ('$trackingId', $orderId, 'Processing');";
-
-		// Executes the query and checks for errors
-		$result = $connection->query($sql);
-		if(!$result) {
-			die("Error in SQL query: ".$connection->error);
-		}
-
-
-		/* Inserting Data into Customer_Billing Table */
-
-		// Gets the Billing Details from the user input
-		$cardName = isset($_POST['cardname']) ? $_POST['cardname'] : '';
-		$cardNumber = isset($_POST['cardnumber']) ? $_POST['cardnumber'] : '';
-		$expDate = isset($_POST['expdate']) ? $_POST['expdate'] : '';
-		$securityCode = isset($_POST['code']) ? $_POST['code'] : '';
-
-		// Gets Billing Address
-		$street = isset($_POST['billingAddress']) ? $_POST['billingAddress'] : '';
-		$city = isset($_POST['billingCity']) ? $_POST['billingCity'] : '';
-		$state = isset($_POST['billingState']) ? $_POST['billingState'] : '';
-		$zip = isset($_POST['billingZip']) ? $_POST['billingZip'] : '';
-		$completeAddress = $street.', '.$city.', '.$state.', '.$zip;
-
-		// Prepares the query for execution
-		$sql = "INSERT INTO Customer_Billing(OrderID, CustomerID, CardName, CardNumber, CardExpiration, CVV, BillingAddress)
-				VALUES ($orderId, $customerId, '$cardName', '$cardNumber', '$expDate', '$securityCode', '$completeAddress');";
-
-		// Executes the query and checks for errors
-		$result = $connection->query($sql);
-		if(!$result) {
-			die("Error in SQL query: ".$connection->error);
-		}
-
-		// Loads Confirmation Page after the data insertion into the database
-		header("Location: confirmation.php?id=$trackingId");
-		exit();
-	}
-	?>
 	<header>
 		<div class="navbar" id="navbar">
 			<a href="mainVRAMS.php"><img src="VRAMSLogo.png" alt="VRAMS logo" width="200" height="150"></a>
@@ -167,6 +26,13 @@
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
 		</div>
 	</header>
+
+	<?php
+	$cartItems = getCartItems();
+	$subtotal = calculateSubtotal();
+	$total = calculateTotal();
+	?>
+
 	<main>
 		<h1>Checkout (
 			<?php echo count($cartItems); ?> items)
@@ -202,7 +68,7 @@
 			<input type="text" placeholder="City" size="12" name="billingCity" required />
 			<input type="text" placeholder="State" size="12" name="billingState" required />
 			<input type="numeric" placeholder="Zip Code" size="10" name="billingZip" maxlength="5" required /><br>
-			<input type="hidden" name="trackingId" value="<?php echo $trackingId;?>">
+			<input type="hidden" name="trackingId" value="<?php echo $trackingId; ?>">
 
 			<h3>Order Summary</h3>
 
