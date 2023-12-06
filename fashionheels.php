@@ -22,19 +22,23 @@
         <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
     </div>
 </header>
+
 <b>
 
 
-    <h1> <center> Yoga Flex Sandals</center> </h1>
-    <center><img src="https://images.boardriders.com/globalGrey/billabong-products/all/default/medium-large/jaftmdam_billabong,p_bkw2_frt3.jpg" alt="Yoga Flex Sandals"></center>
-	
+    <h1> <center> High-Fashion Heels </center> </h1>
+    <center><img src="https://static.wixstatic.com/media/68c3d3_c6b1ed46c629401a9dc835f2d8d67d9c~mv2.jpg/v1/fill/w_256,h_256,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/68c3d3_c6b1ed46c629401a9dc835f2d8d67d9c~mv2.jpg" alt="High-Fashion Heels"></center>
+
+
+
+
 
     <?php
 include 'connection.php';
 include 'cart_functions.php';
 
 // Fetch product details from the database
-$queryProduct = mysqli_query($connection, "SELECT ProductID, ProductName, ProductPrice, ProductDescription, Qty FROM Products WHERE ProductName = 'Yoga Flex Sandals'");
+$queryProduct = mysqli_query($connection, "SELECT ProductID, ProductName, ProductPrice, ProductDescription, Qty FROM Products WHERE ProductName = 'High-Fashion Heels'");
 $product = mysqli_fetch_array($queryProduct, MYSQLI_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adding'])) {
@@ -49,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adding'])) {
     }
 }
 
-$queryP = mysqli_query($connection, "select ProductName, ProductPrice, ProductDescription, Qty from Products WHERE ProductName = 'Yoga Flex Sandals'");
+$queryP = mysqli_query($connection, "select ProductName, ProductPrice, ProductDescription, Qty from Products WHERE ProductName = 'High-Fashion Heels'");
 while ($row = mysqli_fetch_array($queryP, MYSQLI_ASSOC)) {
     ?>
     <h3> Name: </h3> <?php echo $row['ProductName']; ?> <br>
@@ -84,4 +88,4 @@ while ($row = mysqli_fetch_array($queryP, MYSQLI_ASSOC)) {
 
 
 
-</html>  
+</html>
