@@ -110,6 +110,6 @@ VALUES ('All-Terrain Sandals', 'Sandals with grippy soles for all-terrain use', 
 
 
 --> Inserting an employee
-INSERT INTO User_Employee(Address, Password, Email, Phone_num, FirstName, LastName)
+INSERT INTO User_Employee(Address, Password, Email, PhoneNumber, FirstName, LastName)
 VALUES ('6753 S Monroe St. Plano, IL 68504', 'TrippyToes1!', 'trippy@outlook.com', '3123422159', 'Bob', 'Burgers');
 
