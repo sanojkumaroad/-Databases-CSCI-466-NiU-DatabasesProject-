@@ -6,8 +6,8 @@
 --> DROP TABLE IF EXISTS Order_Tracking, Customer_Billing, Order_Discount, Order_Info, Promo_Code, Order_Status, Products, User_Employee, User_Customer;
 
 --> Creating Entity Tables
-CREATE TABLE User_Customer(CustomerID INT AUTO_INCREMENT PRIMARY KEY, Address VARCHAR(300), Password VARCHAR(35), Email VARCHAR(75), PhoneNumber VARCHAR(15), FirstName VARCHAR(50), LastName VARCHAR(50));
-CREATE TABLE User_Employee(EmployeeID INT AUTO_INCREMENT PRIMARY KEY, Address VARCHAR(300), Password VARCHAR(35), Email VARCHAR(75), PhoneNumber VARCHAR(15), FirstName VARCHAR(50), LastName VARCHAR(50));
+CREATE TABLE User_Customer(CustomerID INT AUTO_INCREMENT PRIMARY KEY, Address VARCHAR(300), Password VARCHAR(255), Email VARCHAR(75), PhoneNumber VARCHAR(15), FirstName VARCHAR(50), LastName VARCHAR(50));
+CREATE TABLE User_Employee(EmployeeID INT AUTO_INCREMENT PRIMARY KEY, Address VARCHAR(300), Password VARCHAR(255), Email VARCHAR(75), PhoneNumber VARCHAR(15), FirstName VARCHAR(50), LastName VARCHAR(50));
 CREATE TABLE Products(ProductID INT AUTO_INCREMENT PRIMARY KEY, ProductName VARCHAR(50), ProductDescription VARCHAR(200), Qty INT, ProductPrice FLOAT);
 CREATE TABLE Order_Info(OrderID INT AUTO_INCREMENT PRIMARY KEY, CustomerID INT, OrderDate VARCHAR(50), OrderTotal FLOAT, FOREIGN KEY (CustomerID) REFERENCES User_Customer(CustomerID));
 CREATE TABLE Order_Item(OrderItemID INT AUTO_INCREMENT PRIMARY KEY, OrderID INT, ProductID INT, ItemQty INT, SUBTOTAL FLOAT, FOREIGN KEY (OrderID) REFERENCES Order_Info(OrderID), FOREIGN KEY (ProductID) REFERENCES Products(ProductID));
