@@ -22,11 +22,12 @@
         <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
     </div>
 </header>
+
 <b>
 
 
-    <h1> <center> Yoga Flex Sandals</center> </h1>
-    <center><img src="https://images.boardriders.com/globalGrey/billabong-products/all/default/medium-large/jaftmdam_billabong,p_bkw2_frt3.jpg" alt="Yoga Flex Sandals"></center>
+    <h1> <center> Retro Basketball </center> </h1>
+    <center><img src="https://www.area02.com/_next/image?url=https%3A%2F%2Fimg.area02.com%2Fnode%2Fslideshow%2Fslides_1409_1643277108298.png&w=256&q=85" alt="Retro Basketball"></center>
 	
 
     <?php
@@ -34,7 +35,7 @@ include 'connection.php';
 include 'cart_functions.php';
 
 // Fetch product details from the database
-$queryProduct = mysqli_query($connection, "SELECT ProductID, ProductName, ProductPrice, ProductDescription, Qty FROM Products WHERE ProductName = 'Yoga Flex Sandals'");
+$queryProduct = mysqli_query($connection, "SELECT ProductID, ProductName, ProductPrice, ProductDescription, Qty FROM Products WHERE ProductName = 'Retro Basketball'");
 $product = mysqli_fetch_array($queryProduct, MYSQLI_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adding'])) {
@@ -49,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adding'])) {
     }
 }
 
-$queryP = mysqli_query($connection, "select ProductName, ProductPrice, ProductDescription, Qty from Products WHERE ProductName = 'Yoga Flex Sandals'");
+$queryP = mysqli_query($connection, "select ProductName, ProductPrice, ProductDescription, Qty from Products WHERE ProductName = 'Retro Basketball'");
 while ($row = mysqli_fetch_array($queryP, MYSQLI_ASSOC)) {
     ?>
     <h3> Name: </h3> <?php echo $row['ProductName']; ?> <br>
@@ -78,10 +79,11 @@ while ($row = mysqli_fetch_array($queryP, MYSQLI_ASSOC)) {
     </div>
     <p>All rights reserved. © 2023 VRAMS Shoe Store</p>
 </footer>
+
 </body>
 
 
 
 
 
-</html>  
+</html> 
