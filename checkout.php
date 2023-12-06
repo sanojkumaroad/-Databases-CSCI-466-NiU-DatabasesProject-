@@ -15,6 +15,7 @@
 	$cartItems = getCartItems();
 	$subtotal = calculateSubtotal();
 	$total = calculateTotal();
+	$trackingId = generateTrackingId();
 
 	// Handle the AJAX request
 	// Check if the form is submitted
@@ -171,8 +172,8 @@
 			<?php echo count($cartItems); ?> items)
 		</h1>
 		<hr>
-		<?php echo '<form method="post" action="confirmation.php?id=' . $trackingId . '">'; ?>
-		<!-- <form method='post' action='confirmation.php?id=$trackingId'> -->
+
+		<form method='post' action='confirmation.php'>
 
 			<h3>Contact Information</h3>
 			<input type="email" placeholder="Email Address" size="25" name="email" required /> <br>
@@ -201,7 +202,7 @@
 			<input type="text" placeholder="City" size="12" name="billingCity" required />
 			<input type="text" placeholder="State" size="12" name="billingState" required />
 			<input type="numeric" placeholder="Zip Code" size="10" name="billingZip" maxlength="5" required /><br>
-
+			<input type="hidden" name="trackingId" value="<?php echo $trackingId;?>">
 
 			<h3>Order Summary</h3>
 
