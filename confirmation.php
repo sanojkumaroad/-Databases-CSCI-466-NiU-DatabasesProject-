@@ -70,7 +70,7 @@
     <p class="info-data-tracking">Order Tracking ID: <?php echo $_POST['trackingId']; ?></p>
 
     <!-- Copy button -->
-    <button onclick="copyToClipboard('<?php echo $_POST['trackingId]; ?>')">Copy</button>
+    <button onclick="copyToClipboard('<?php echo $_POST['trackingId']; ?>')">Copy</button>
 </div>
 
 <!-- Add a reminder line -->
