@@ -4,14 +4,6 @@ session_start(); // Add this line
 // Include database connection
 include 'db.php';
 
-// Function to generate a unique tracking ID
-function generateTrackingId() {
-    // Use the current timestamp and a random number for uniqueness
-    $trackingId = date("YmdHis") . mt_rand(100000, 999999);
-
-    return $trackingId;
-}
-
 // Function to get product details by ID from the database
 function getProductById($product_id) {
     global $pdo;
