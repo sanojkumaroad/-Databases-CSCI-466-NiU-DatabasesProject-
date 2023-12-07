@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	$customerId = -1;
 	$row = $result->fetch_assoc();
-	if ($row["CustomerID"] > 0) {
+	if ($row['CustomerID'] > 0) {
 		$customerId = $row['CustomerID'];
 	}
 
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	/* Inserting Data into Order_Info Table */
 	// Prepares the Query for Order_Info
 	$sql = "INSERT INTO Order_Info(CustomerID, OrderDate, OrderTotal)
-				VALUES ('$customerId', '$orderDate', '$orderTotal')";
+				VALUES ($customerId, '$orderDate', '$orderTotal')";
 
 	// Executes the query and checks for errors
 	$result = $connection->query($sql);
@@ -87,7 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// Finsih OrderItem Later
 
 	/* Inserting Data into Order_Tracking Table */
-	// Prepares query for execution
 	$sql = "INSERT INTO Order_Tracking(TrackingID, OrderID, TrackingStatus)
 				VALUES ('$trackingId', '$orderId', 'Processing');";
 
@@ -97,9 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		die("Error in SQL query: " . $connection->error);
 	}
 
-
 	/* Inserting Data into Customer_Billing Table */
-
 	// Gets the Billing Details from the user input
 	$cardName = isset($_POST['cardname']) ? $_POST['cardname'] : '';
 	$cardNumber = isset($_POST['cardnumber']) ? $_POST['cardnumber'] : '';
@@ -122,10 +119,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (!$result) {
 		die("Error in SQL query: " . $connection->error);
 	}
-
-	// Loads Confirmation Page after the data insertion into the database
-	header("Location: confirmation.php?id=$trackingId");
-	exit();
+	// // Loads Confirmation Page after the data insertion into the database
+	// header("Location: confirmation.php?id=$trackingId");
+	// exit();
 }
 ?>
 
@@ -147,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			<a href="AboutUs.php">About Us</a>
 			<a href="Contact.php">Contact</a>
 			<a href="Login.php">Login/Sign Up</a>
-			<a href="InventoryCheck.php">Employee</a>
+			<a href="Employee_Verify.php">Employee</a>
 			<a href="cart.php">Cart</a>
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
 		</div>
@@ -192,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			</p>
 
 			<!-- Copy button -->
-			<button onclick="copyToClipboard('<?php echo $_POST['trackingId']; ?>')">Copy</button>
+			<button onclick="copyToClipboard('<?php echo $trackingId; ?>')">Copy</button>
 		</div>
 
 		<!-- Add a reminder line -->
