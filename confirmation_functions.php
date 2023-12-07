@@ -134,5 +134,3 @@ function calculateTax() {
     return $tax;
 }
 ?>
-
-
