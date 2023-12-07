@@ -1,8 +1,3 @@
-<?php
-include 'connection.php';
-include 'checkout_functions.php';
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -21,13 +16,16 @@ include 'checkout_functions.php';
 			<a href="AboutUs.php">About Us</a>
 			<a href="Contact.php">Contact</a>
 			<a href="Login.php">Login/Sign Up</a>
-			<a href="InventoryCheck.php">Employee</a>
+			<a href="Employee_Verify.php">Employee</a>
 			<a href="cart.php">Cart</a>
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()"> &#9776; </a>
 		</div>
 	</header>
 
 	<?php
+	include 'connection.php';
+	include 'checkout_functions.php';
+
 	$cartItems = getCartItems();
 	$subtotal = calculateSubtotal();
 	$total = calculateTotal();
@@ -39,12 +37,12 @@ include 'checkout_functions.php';
 		</h1>
 		<hr>
 
-		<form method='post' action='confirmation.php'>
+		<form method="POST" action="confirmation.php">
 
 			<h3>Contact Information</h3>
 			<input type="email" placeholder="Email Address" size="25" name="email" required /> <br>
 			<input type="tel" placeholder="Phone Number (123-456-7890)" size="25" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-				name="number" required /><br>
+				   name="number" required /><br>
 
 			<h3>Delivery Information</h3>
 			<input type="text" placeholder="First Name" name="fname" required />
@@ -57,7 +55,7 @@ include 'checkout_functions.php';
 			<h3>Payment Information</h3>
 			<input type="numeric" placeholder="Card Number" size="30" name="cardnumber" maxlength="19" required /><br>
 			<input type="text" placeholder="Exp. Date (MM/YY)" size="13" pattern="[0-9]{2}/[0-9]{2}" name="expdate"
-				maxlength="5" required />
+				   maxlength="5" required />
 			<input type="numeric" placeholder="Security Code" size="11" name="code" maxlength="4" required /><br>
 			<input type="text" placeholder="Name on card" size="30" name="cardname" required />
 
